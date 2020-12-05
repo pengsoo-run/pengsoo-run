@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
 
-import Preloader from '~/scenes/Preloader';
-import Game from '~/scenes/Game';
+import Setting from './setting';
+
+import Preloader from '../scenes/Preloader';
+import Game from '../scenes/Game';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: 600,
-  height: 400,
+  width: Setting.WIDTH,
+  height: Setting.HEIGHT,
   parent: 'container',
   physics: {
     default: 'arcade',
