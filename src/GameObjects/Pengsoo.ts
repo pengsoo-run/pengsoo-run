@@ -22,11 +22,11 @@ export default class Pengsoo extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 1)
       .play('pengsoo-run');
 
-    this.jumping = scene.add.sprite(-60, -15, 'pengsoo').play('pengsoo-fly');
-    this.jumping.setVisible(false);
+    // this.jumping = scene.add.sprite(-60, -15, 'pengsoo').play('pengsoo-fly');
+    // this.jumping.setVisible(false);
 
     this.add(this.running);
-    this.add(this.jumping);
+    // this.add(this.jumping);
 
     scene.physics.add.existing(this);
 
@@ -45,26 +45,6 @@ export default class Pengsoo extends Phaser.GameObjects.Container {
     if (this.currentState !== PengsooState.Running) return;
 
     // TODO: keyboard input -> socket event
-
-    // if (body.position.y >= 459) {
-    //   body.setGravityY(0);
-    //   body.setVelocityY(0);
-    // }
-
-    // if (this.cursors.up?.isDown) {
-    //   console.log('up');
-    //   body.setVelocityY(-200);
-    //   this.jumping.setVisible(true);
-    // } else if (this.cursors.up?.isUp) {
-
-    // }
-
-    // if (this.cursors.down?.isDown) {
-    //   console.log('down');
-    //   body.setVelocityY(300);
-    //   this.jumping.setVisible(true);
-    // }
-
     if (this.cursors.left?.isDown) {
       body.setVelocityX(-300);
     } else if (this.cursors.right?.isDown) {
