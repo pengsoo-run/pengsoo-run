@@ -1,0 +1,134 @@
+{
+  "frames": {
+    "pengsoo_jump01.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 170
+      }
+    },
+    "pengsoo_jump02.png": {
+      "frame": {
+        "x": 120,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 170
+      }
+    },
+    "pengsoo_jump03.png": {
+      "frame": {
+        "x": 240,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 170
+      }
+    },
+    "pengsoo_jump04.png": {
+      "frame": {
+        "x": 360,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 170
+      }
+    },
+    "pengsoo_jump05.png": {
+      "frame": {
+        "x": 480,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 170
+      }
+    },
+    "pengsoo_jump06.png": {
+      "frame": {
+        "x": 600,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 170
+      }
+    }
+  },
+  "meta": {
+    "version": "1.0",
+    "image": "pengsoo_jump.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 720,
+      "h": 170
+    },
+    "scale": "1"
+  }
+}

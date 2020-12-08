@@ -37,9 +37,15 @@ export class Preloader extends Phaser.Scene {
     );
 
     this.load.atlas(
-      'pengsoo',
+      'pengsoo_run',
       'character/pengsoo_run.png',
       'character/pengsoo_run.json',
+    );
+
+    this.load.atlas(
+      'pengsoo_jump',
+      'character/pengsoo_jump.png',
+      'character/pengsoo_jump.json',
     );
 
     this.load.image('pola-bear', 'obstacle/polar_bear.png');
@@ -56,7 +62,7 @@ export class Preloader extends Phaser.Scene {
   create() {
     this.anims.create({
       key: 'pengsoo-run',
-      frames: this.anims.generateFrameNames('pengsoo', {
+      frames: this.anims.generateFrameNames('pengsoo_run', {
         start: 0,
         end: 3,
         prefix: 'pengsoo_run',
@@ -68,15 +74,16 @@ export class Preloader extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: 'pengsoo-fly',
-      frames: this.anims.generateFrameNames('pengsoo', {
-        start: 1,
-        end: 2,
-        prefix: 'flame',
+      key: 'pengsoo-jump',
+      frames: this.anims.generateFrameNames('pengsoo_jump', {
+        start: 0,
+        end: 5,
+        prefix: 'pengsoo_jump',
+        zeroPad: 2,
         suffix: '.png',
       }),
-      frameRate: 5,
-      repeat: -1,
+      frameRate: 8,
+      repeat: 1,
     });
   }
 

@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
-import Obstacle from '~/GameObjects/Obstacle';
 
 import Setting from '../config/setting';
 
-import Pengsoo from '../GameObjects/Pengsoo';
+import { Pengsoo } from '../GameObjects/Pengsoo';
+import { Obstacle } from '../GameObjects/Obstacle';
 
 export class Game extends Phaser.Scene {
   private pengsoo!: Pengsoo;
@@ -20,7 +20,7 @@ export class Game extends Phaser.Scene {
     this.registry.set('score', -1);
   }
 
-  create() {
+  create(): void {
     this.add
       .tileSprite(0, 0, Setting.WIDTH, Setting.HEIGHT, 'bg_guideline')
       .setOrigin(0)
@@ -51,7 +51,6 @@ export class Game extends Phaser.Scene {
   private addObstacle(): void {
     this.registry.values.score += 1;
     this.scoreText.setText(this.registry.values.score);
-
     this.obstacles.add(
       new Obstacle(
         this,
@@ -64,7 +63,7 @@ export class Game extends Phaser.Scene {
     );
   }
 
-  update(t: number, dt: number) {
+  update(t: number, dt: number): void {
     // console.log(this.obstacles);
   }
 }
