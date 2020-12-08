@@ -1,33 +1,50 @@
 import Phaser from 'phaser';
 import Setting from '~/config/setting';
 
-export default class Obstacle extends Phaser.GameObjects.Container {
-  private comming: Phaser.GameObjects.Sprite;
+export default class Obstacle extends Phaser.GameObjects.Image {
+  private speed: number = 1;
 
-  constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y);
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    key: string,
+    frame: number,
+    speed: number,
+  ) {
+    super(scene, x, y, key, frame);
 
-    this.comming = this.scene.add.sprite(0, 0, 'pola-bear');
+    this.speed = speed;
+    this.setScale(0);
 
-    this.add(this.comming);
-    this.scene.physics.add.existing(this.comming);
+    if (this.x - 400 > 0) {
+      this.setFlipX(true);
+      this.setOrigin(0, 0);
+    } else {
+      this.setOrigin(1, 0);
+    }
 
-    this.setScale(0.15);
+    this.scene.physics.world.enable(this);
+    this.scene.add.existing(this);
   }
 
   create() {}
 
   preUpdate() {
-    // const body = this.comming.body as Phaser.Physics.Arcade.Body;
-    // body.setVelocityY(100);
+    const rateX = this.x - 400;
+    const rateY = (this.y - 130) / 600;
 
-    this.setX(this.x + (this.x - 400) / 80);
-    this.setY(this.y + (1.2 * (this.y + 150)) / 100);
-    this.setScale((0.15 * (1.2 * (this.y + 150))) / 100);
+    const velocityX = ((this.x - 400) / 300) * this.speed;
+    const velocityY = ((1.2 * (this.y + 150)) / 300) * this.speed;
 
-    if (this.y >= Setting.HEIGHT) {
-      // console.log('파괴');
-      this.comming.destroy();
+    this.setY(this.y + velocityY);
+    this.setX(this.x + velocityX);
+
+    this.setScale(1 * rateY);
+
+    if (this.y > Setting.HEIGHT + 120) {
+      console.log('북극곰 파괴');
+      this.destroy();
     }
   }
 }

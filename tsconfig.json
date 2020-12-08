@@ -11,7 +11,9 @@
     "baseUrl": "./src",
     "paths": {
       "~/*": ["./*"]
-    }
+    },
+    "typeRoots": ["node_modules/@types", "node_module/phaser/types"],
+    "types": ["phaser"]
   },
   "include": ["./src/**/*"],
   "exclude": ["./node_modules/**/*"]

@@ -1,67 +1,54 @@
 import Phaser from 'phaser';
 
-export default class Preloader extends Phaser.Scene {
+export class Preloader extends Phaser.Scene {
+  private loadingBar!: Phaser.GameObjects.Graphics;
+  private progressBar!: Phaser.GameObjects.Graphics;
+
   constructor() {
     super('preloader');
   }
 
-  preload() {
-    const progressBar = this.add.graphics();
-    const progressBox = this.add.graphics();
-    progressBox.fillStyle(0x8d8d8d, 0.8);
-    progressBox.fillRect(240, 270, 320, 50);
+  preload(): void {
+    this.cameras.main.setBackgroundColor(0x98d687);
+    this.createLoadingbar();
 
-    const width = this.cameras.main.width;
-    const height = this.cameras.main.height;
-
-    const loadingText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 50,
-      text: '로딩 중..',
-      style: {
-        font: '20px monospace',
-        fill: '#ffffff',
+    this.load.on(
+      'progress',
+      (value: number) => {
+        this.progressBar.clear();
+        this.progressBar.fillStyle(0xfff6d3, 1);
+        this.progressBar.fillRect(
+          this.cameras.main.width / 4,
+          this.cameras.main.height / 2 - 16,
+          (this.cameras.main.width / 2) * value,
+          16,
+        );
       },
-    });
+      this,
+    );
 
-    loadingText.setOrigin(0.5, 0.5);
-
-    const percentText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 5,
-      text: '0%',
-      style: {
-        font: '18px monospace',
-        fill: '#ffffff',
+    this.load.on(
+      'complete',
+      () => {
+        this.progressBar.destroy();
+        this.loadingBar.destroy();
       },
-    });
-
-    percentText.setOrigin(0.5, 0.5);
-
-    this.load.on('progress', (value: number) => {
-      percentText.setText(Math.floor(value * 100) + '%');
-      progressBar.clear();
-      progressBar.fillStyle(0xffffff, 1);
-      progressBar.fillRect(250, 280, 300 * value, 30);
-    });
-
-    this.load.on('complete', function () {
-      progressBar.destroy();
-      progressBox.destroy();
-      loadingText.destroy();
-      percentText.destroy();
-    });
+      this,
+    );
 
     this.load.atlas(
       'pengsoo',
       'character/pengsoo_run.png',
       'character/pengsoo_run.json',
     );
+
     this.load.image('pola-bear', 'obstacle/polar_bear.png');
-    this.load.image('bg_guideline', 'background/bg_guideline2.png');
+    this.load.image('bg_guideline', 'background/bg_guideline.png');
     this.load.image('sky', 'background/sky.png');
 
-    for (var i = 0; i < 100; i++) {
+    this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt');
+
+    for (var i = 0; i < 200; i++) {
       this.load.image('logo' + i, 'obstacle/polar_bear.png');
     }
   }
@@ -91,7 +78,21 @@ export default class Preloader extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
+  }
 
+  update(): void {
     this.scene.start('game');
+  }
+
+  private createLoadingbar(): void {
+    this.loadingBar = this.add.graphics();
+    this.loadingBar.fillStyle(0x5dae47, 1);
+    this.loadingBar.fillRect(
+      this.cameras.main.width / 4 - 2,
+      this.cameras.main.height / 2 - 18,
+      this.cameras.main.width / 2 + 4,
+      20,
+    );
+    this.progressBar = this.add.graphics();
   }
 }
