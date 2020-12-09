@@ -9,7 +9,6 @@ enum PengsooState {
 
 export class Pengsoo extends Phaser.GameObjects.Container {
   private running: Phaser.GameObjects.Sprite;
-  private jumping: Phaser.GameObjects.Sprite;
   private jumpTimer: number = 0;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -42,7 +41,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
     if (this.currentState === PengsooState.Running) {
       if (this.cursors.up?.isDown || this.cursors.space?.isDown) {
         this.currentState = PengsooState.Jumping;
-        this.jumpTimer = 50;
+        this.jumpTimer = 45;
         this.running.play('pengsoo-jump');
         console.log('쩜프');
       }

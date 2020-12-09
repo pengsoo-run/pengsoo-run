@@ -36,6 +36,7 @@ export class Preloader extends Phaser.Scene {
       this,
     );
 
+    // load assets - pengsoo animaion
     this.load.atlas(
       'pengsoo_run',
       'character/pengsoo_run.png',
@@ -48,12 +49,17 @@ export class Preloader extends Phaser.Scene {
       'character/pengsoo_jump.json',
     );
 
-    this.load.image('pola-bear', 'obstacle/polar_bear.png');
-    this.load.image('bg_guideline', 'background/bg_guideline.png');
+    // load assets - background
+    this.load.image('bg', 'background/bg.png');
     this.load.image('sky', 'background/sky.png');
+    this.load.image('clouds1', 'background/clouds.png');
+    this.load.image('clouds2', 'background/clouds2.png');
 
+    // load assets - font
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt');
 
+    // load assets - obstacles
+    this.load.image('pola-bear', 'obstacle/polar_bear.png');
     for (var i = 0; i < 200; i++) {
       this.load.image('logo' + i, 'obstacle/polar_bear.png');
     }
@@ -82,7 +88,7 @@ export class Preloader extends Phaser.Scene {
         zeroPad: 2,
         suffix: '.png',
       }),
-      frameRate: 8,
+      frameRate: 6,
       repeat: 1,
     });
   }

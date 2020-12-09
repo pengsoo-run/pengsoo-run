@@ -4,8 +4,10 @@ import Setting from '../config/setting';
 
 import { Pengsoo } from '../GameObjects/Pengsoo';
 import { Obstacle } from '../GameObjects/Obstacle';
+import { Background } from '~/GameObjects/Background';
 
 export class Game extends Phaser.Scene {
+  private background!: Background;
   private pengsoo!: Pengsoo;
   private obstacles!: Phaser.GameObjects.Group;
   private scoreText!: Phaser.GameObjects.BitmapText;
@@ -16,21 +18,16 @@ export class Game extends Phaser.Scene {
     super('game');
   }
 
-  init(): void {
+  public init(): void {
     this.registry.set('score', -1);
   }
 
-  create(): void {
-    this.add
-      .tileSprite(0, 0, Setting.WIDTH, Setting.HEIGHT, 'bg_guideline')
-      .setOrigin(0)
-      .setDepth(0);
-
-    this.add.image(0, 0, 'sky').setOrigin(0).setDepth(1);
+  public create(): void {
+    this.background = new Background(this);
 
     this.scoreText = this.add
       .bitmapText(30, 30, 'font', this.registry.values.score)
-      .setDepth(2);
+      .setDepth(5);
 
     this.pengsoo = new Pengsoo(this, Setting.WIDTH * 0.5, Setting.HEIGHT * 0.9);
     this.add.existing(this.pengsoo);
@@ -57,13 +54,12 @@ export class Game extends Phaser.Scene {
         Phaser.Math.Between(350, Setting.WIDTH - 350),
         150,
         'pola-bear',
-        0,
         1,
       ),
     );
   }
 
-  update(t: number, dt: number): void {
-    // console.log(this.obstacles);
+  public update(time: number, delta: number): void {
+    this.background.update();
   }
 }

@@ -14,12 +14,11 @@ export class Obstacle extends Phaser.GameObjects.Container {
     x: number,
     y: number,
     key: string,
-    frame: number,
     speed: number,
   ) {
     super(scene, x, y);
 
-    this.image = this.scene.add.image(0, 0, key);
+    this.image = this.scene.add.image(0, 0, key).setDepth(99);
     this.add(this.image);
 
     scene.physics.add.existing(this);
@@ -58,7 +57,7 @@ export class Obstacle extends Phaser.GameObjects.Container {
     this.setScale(1 * rateY);
 
     if (this.y > Setting.HEIGHT + 120) {
-      console.log('북극곰 파괴');
+      console.log('destroy obstacle');
       this.destroy();
     }
   }
