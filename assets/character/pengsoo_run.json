@@ -1,0 +1,94 @@
+{
+  "frames": {
+    "pengsoo_run01.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 125
+      }
+    },
+    "pengsoo_run02.png": {
+      "frame": {
+        "x": 120,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 125
+      }
+    },
+    "pengsoo_run03.png": {
+      "frame": {
+        "x": 240,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 125
+      }
+    },
+    "pengsoo_run04.png": {
+      "frame": {
+        "x": 360,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 120,
+        "h": 125
+      },
+      "sourceSize": {
+        "w": 120,
+        "h": 125
+      }
+    }
+  },
+  "meta": {
+    "version": "1.0",
+    "image": "pengsoo_run.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 480,
+      "h": 125
+    },
+    "scale": "1"
+  }
+}

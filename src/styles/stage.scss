@@ -1,0 +1,7 @@
+@import './variables';
+
+#canvas {
+  border: 2px solid green;
+  box-shadow: $box-shadow;
+  background-color: $white;
+}

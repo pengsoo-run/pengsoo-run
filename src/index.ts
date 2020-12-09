@@ -1,3 +1,9 @@
+import Phaser from 'phaser';
+
+import config from './config/game';
+
+import './styles/main.scss';
+
 window.onload = function () {
-  console.log('init!');
+  new Phaser.Game(config);
 };

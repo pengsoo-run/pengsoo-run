@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import './reset';
+@import './variables';
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  color: $red;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: $container_width;
+    height: $container_height;
+    background-color: rgba($yellow, 0.7);
+
+    .title {
+      padding: 20px;
+    }
+  }
+}
