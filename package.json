@@ -10,9 +10,11 @@
     "lint:fix": "eslint --fix src/**/*.ts"
   },
   "dependencies": {
-    "phaser": "^3.24.1"
+    "phaser": "^3.24.1",
+    "socket.io-client": "^2.3.1"
   },
   "devDependencies": {
+    "@types/socket.io-client": "^1.4.34",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "parcel-bundler": "^1.12.4",
