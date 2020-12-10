@@ -5,7 +5,7 @@ import Setting from './consts/Setting';
 import { Preloader } from './scenes/Preloader';
 import { Game } from './scenes/Game';
 
-const config: Phaser.Types.Core.GameConfig = {
+export const config: Phaser.Types.Core.GameConfig = {
   title: 'Pengsoo Run',
   type: Phaser.AUTO,
   width: Setting.WIDTH,
@@ -17,5 +17,3 @@ const config: Phaser.Types.Core.GameConfig = {
   },
   scene: [Preloader, Game],
 };
-
-export default config;

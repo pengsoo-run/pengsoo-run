@@ -11,7 +11,6 @@ export class Preloader extends Phaser.Scene {
   }
 
   preload(): void {
-    Setting.WIDTH;
     this.cameras.main.setBackgroundColor(0x98d687);
     this.createLoadingbar();
 
