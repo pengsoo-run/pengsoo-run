@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 
-import Setting from '../config/setting';
+import Setting from '~/consts/Setting';
 
-import { Pengsoo } from '../GameObjects/Pengsoo';
-import { Obstacle } from '../GameObjects/Obstacle';
+import { Pengsoo } from '~/GameObjects/Pengsoo';
+import { Obstacle } from '~/GameObjects/Obstacle';
 import { Background } from '~/GameObjects/Background';
 
 export class Game extends Phaser.Scene {
@@ -26,7 +26,7 @@ export class Game extends Phaser.Scene {
     this.background = new Background(this);
 
     this.scoreText = this.add
-      .bitmapText(30, 30, 'font', this.registry.values.score)
+      .bitmapText(30, 30, 'font', `SCORE ${this.registry.values.score}`)
       .setDepth(5);
 
     this.pengsoo = new Pengsoo(this, Setting.WIDTH * 0.5, Setting.HEIGHT * 0.9);
@@ -47,19 +47,23 @@ export class Game extends Phaser.Scene {
 
   private addObstacle(): void {
     this.registry.values.score += 1;
-    this.scoreText.setText(this.registry.values.score);
+    this.scoreText.setText(`SCORE ${this.registry.values.score}`);
     this.obstacles.add(
       new Obstacle(
         this,
         Phaser.Math.Between(350, Setting.WIDTH - 350),
         150,
-        'pola-bear',
-        1,
+        'hole01',
+        this.currentLevel,
       ),
     );
   }
 
   public update(time: number, delta: number): void {
     this.background.update();
+
+    this.physics.overlap(this.pengsoo, this.obstacles, () => {
+      this.pengsoo.gotHurt();
+    });
   }
 }

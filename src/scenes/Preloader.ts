@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import Setting from '~/consts/Setting';
+
 export class Preloader extends Phaser.Scene {
   private loadingBar!: Phaser.GameObjects.Graphics;
   private progressBar!: Phaser.GameObjects.Graphics;
@@ -9,6 +11,7 @@ export class Preloader extends Phaser.Scene {
   }
 
   preload(): void {
+    Setting.WIDTH;
     this.cameras.main.setBackgroundColor(0x98d687);
     this.createLoadingbar();
 
@@ -18,9 +21,9 @@ export class Preloader extends Phaser.Scene {
         this.progressBar.clear();
         this.progressBar.fillStyle(0xfff6d3, 1);
         this.progressBar.fillRect(
-          this.cameras.main.width / 4,
-          this.cameras.main.height / 2 - 16,
-          (this.cameras.main.width / 2) * value,
+          Setting.WIDTH / 4,
+          Setting.HEIGHT / 2 - 16,
+          (Setting.WIDTH / 2) * value,
           16,
         );
       },
@@ -36,7 +39,6 @@ export class Preloader extends Phaser.Scene {
       this,
     );
 
-    // load assets - pengsoo animaion
     this.load.atlas(
       'pengsoo_run',
       'character/pengsoo_run.png',
@@ -49,17 +51,16 @@ export class Preloader extends Phaser.Scene {
       'character/pengsoo_jump.json',
     );
 
-    // load assets - background
     this.load.image('bg', 'background/bg.png');
     this.load.image('sky', 'background/sky.png');
     this.load.image('clouds1', 'background/clouds.png');
     this.load.image('clouds2', 'background/clouds2.png');
 
-    // load assets - font
     this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt');
 
-    // load assets - obstacles
-    this.load.image('pola-bear', 'obstacle/polar_bear.png');
+    this.load.image('hole01', 'obstacle/hole01.png');
+    this.load.image('hole02', 'obstacle/hole02.png');
+
     for (var i = 0; i < 200; i++) {
       this.load.image('logo' + i, 'obstacle/polar_bear.png');
     }
@@ -88,7 +89,7 @@ export class Preloader extends Phaser.Scene {
         zeroPad: 2,
         suffix: '.png',
       }),
-      frameRate: 6,
+      frameRate: 8,
       repeat: 1,
     });
   }
@@ -101,9 +102,9 @@ export class Preloader extends Phaser.Scene {
     this.loadingBar = this.add.graphics();
     this.loadingBar.fillStyle(0x5dae47, 1);
     this.loadingBar.fillRect(
-      this.cameras.main.width / 4 - 2,
-      this.cameras.main.height / 2 - 18,
-      this.cameras.main.width / 2 + 4,
+      Setting.WIDTH / 4 - 2,
+      Setting.HEIGHT / 2 - 18,
+      Setting.WIDTH / 2 + 4,
       20,
     );
     this.progressBar = this.add.graphics();

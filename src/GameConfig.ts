@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 
-import Setting from './setting';
+import Setting from './consts/Setting';
 
-import { Preloader } from '../scenes/Preloader';
-import { Game } from '../scenes/Game';
+import { Preloader } from './scenes/Preloader';
+import { Game } from './scenes/Game';
 
 const config: Phaser.Types.Core.GameConfig = {
   title: 'Pengsoo Run',

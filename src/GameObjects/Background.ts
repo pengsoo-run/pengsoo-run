@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Setting from '~/config/setting';
+import Setting from '~/consts/Setting';
 
 export class Background {
   private scene: Phaser.Scene;

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import config from './config/game';
+import config from './GameConfig';
 
 import './styles/main.scss';
 

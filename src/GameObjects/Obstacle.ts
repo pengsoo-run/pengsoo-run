@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Setting from '~/config/setting';
+import Setting from '~/consts/Setting';
 
 type Side = 'left' | 'right';
 
@@ -18,7 +18,7 @@ export class Obstacle extends Phaser.GameObjects.Container {
   ) {
     super(scene, x, y);
 
-    this.image = this.scene.add.image(0, 0, key).setDepth(99);
+    this.image = this.scene.add.image(0, 0, key).setDepth(-1);
     this.add(this.image);
 
     scene.physics.add.existing(this);
@@ -30,16 +30,15 @@ export class Obstacle extends Phaser.GameObjects.Container {
     this.setScale(0);
 
     const body = this.body as Phaser.Physics.Arcade.Body;
+    body.setSize(this.image.width * 0.8, this.image.height * 0.4);
 
     if (this.side === 'right') {
       this.image.setFlipX(true);
-      this.image.setOrigin(0, 0);
-      body.setSize(this.image.width * 0.8, this.image.height * 0.5);
-      body.setOffset(this.image.width * 0.1, this.image.height * 0.4);
+      this.image.setOrigin(0, 0.5);
+      body.setOffset(40, -10);
     } else {
-      this.image.setOrigin(1, 0);
-      body.setSize(-this.image.width * 0.8, this.image.height * 0.5);
-      body.setOffset(-this.image.width * 0.1, this.image.height * 0.4);
+      this.image.setOrigin(1, 0.5);
+      body.setOffset(-this.image.width + 30, -10);
     }
 
     this.scene.physics.world.enable(this);
@@ -47,8 +46,8 @@ export class Obstacle extends Phaser.GameObjects.Container {
   }
 
   preUpdate(): void {
-    const velocityX = (this.distanceFromCenter / 300) * this.speed;
-    const velocityY = ((1.2 * (this.y + 150)) / 300) * this.speed;
+    const velocityX = (this.distanceFromCenter / 200) * this.speed;
+    const velocityY = (this.y / 200) * this.speed;
     const rateY = (this.y - 130) / 600;
 
     this.setY(this.y + velocityY);
@@ -57,7 +56,6 @@ export class Obstacle extends Phaser.GameObjects.Container {
     this.setScale(1 * rateY);
 
     if (this.y > Setting.HEIGHT + 120) {
-      console.log('destroy obstacle');
       this.destroy();
     }
   }
