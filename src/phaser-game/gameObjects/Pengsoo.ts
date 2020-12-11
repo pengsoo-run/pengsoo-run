@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import Setting from '~/consts/Setting';
+
+import Setting from '../consts/Setting';
 
 enum PengsooState {
   Running,

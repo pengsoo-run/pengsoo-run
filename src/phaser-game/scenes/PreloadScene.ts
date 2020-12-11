@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
-import Setting from '~/consts/Setting';
+import Setting from '../consts/Setting';
 
-export class Preloader extends Phaser.Scene {
+export class PreloadScene extends Phaser.Scene {
   private loadingBar!: Phaser.GameObjects.Graphics;
   private progressBar!: Phaser.GameObjects.Graphics;
 
@@ -60,7 +60,7 @@ export class Preloader extends Phaser.Scene {
     this.load.image('hole01', 'obstacle/hole01.png');
     this.load.image('hole02', 'obstacle/hole02.png');
 
-    for (var i = 0; i < 200; i++) {
+    for (let i = 0; i < 200; i++) {
       this.load.image('logo' + i, 'obstacle/polar_bear.png');
     }
   }
