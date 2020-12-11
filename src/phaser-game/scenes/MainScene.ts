@@ -1,12 +1,12 @@
 import Phaser from 'phaser';
 
-import Setting from '~/consts/Setting';
+import Setting from '../consts/Setting';
 
-import { Pengsoo } from '~/GameObjects/Pengsoo';
-import { Obstacle } from '~/GameObjects/Obstacle';
-import { Background } from '~/GameObjects/Background';
+import { Background } from '../gameObjects/Background';
+import { Pengsoo } from '../gameObjects/Pengsoo';
+import { Obstacle } from '../gameObjects/Obstacle';
 
-export class Game extends Phaser.Scene {
+export class MainScene extends Phaser.Scene {
   private background!: Background;
   private pengsoo!: Pengsoo;
   private obstacles!: Phaser.GameObjects.Group;
