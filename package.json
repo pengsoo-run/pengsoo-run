@@ -6,17 +6,26 @@
   "scripts": {
     "start": "parcel src/index.html -p 3000 --open",
     "build": "parcel build src/index.html --out-dir dist",
-    "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint --fix src/**/*.ts"
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx}"
   },
   "dependencies": {
     "phaser": "^3.24.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
     "socket.io-client": "^2.3.1"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.5.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.12",
     "@types/socket.io-client": "^1.4.34",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.15.0",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-clean-easy": "^1.0.2",
     "parcel-plugin-static-files-copy": "^2.5.0",
