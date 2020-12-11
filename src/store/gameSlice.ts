@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '~/store';
+import { RootState } from '.';
 
-type GameMode = '1player' | '2player';
+export type GameMode = '1 Player' | '2 Player';
 type Direction = 'left' | 'right' | 'jump';
 
 interface Player {
@@ -18,15 +18,9 @@ interface GameState {
   isPlaying: boolean;
 }
 
-// const initialState: GameState = {
-//   id: null,
-//   playerList: [],
-//   isPlaying: false,
-// };
-
 const initialState: GameState = {
-  id: '2879523487',
-  playerList: [{ name: '당근', socketId: 13254, role: ['jump'] }],
+  id: null,
+  playerList: [],
   isPlaying: false,
 };
 
@@ -34,12 +28,6 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    startGame(state) {
-      state.isPlaying = true;
-    },
-    endGame(state) {
-      state.isPlaying = false;
-    },
     initGame(state, action: PayloadAction<{ id: string; mode: GameMode }>) {
       state.id = action.payload.id;
       state.mode = action.payload.mode;
@@ -50,16 +38,22 @@ export const gameSlice = createSlice({
     deletePlayer(state, action: PayloadAction<Player>) {
       // state
     },
+    startGame(state) {
+      state.isPlaying = true;
+    },
+    resetGame(state) {
+      return initialState;
+    },
   },
 });
 
 // Actions
 export const {
-  startGame,
-  endGame,
   initGame,
   addPlayer,
   deletePlayer,
+  startGame,
+  resetGame,
 } = gameSlice.actions;
 
 // Selectors
