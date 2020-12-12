@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import {
   GameMode,
@@ -10,11 +11,11 @@ import {
 } from '../store/gameSlice';
 import Game from './Game';
 
+const Container = styled.div``;
+
 function Lobby() {
   const game = useSelector(selectGame);
   const dispatch = useDispatch();
-
-  console.log(game.mode);
 
   const selectMode = (ev: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     const selected = (ev.target as HTMLInputElement).value as GameMode;
@@ -22,7 +23,7 @@ function Lobby() {
   };
 
   return (
-    <div>
+    <Container>
       <h1>Lobby</h1>
       {game.mode ? (
         <div>
@@ -47,7 +48,7 @@ function Lobby() {
           <input type='button' onClick={selectMode} value='2 Player' />
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 
