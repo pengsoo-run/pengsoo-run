@@ -8,7 +8,8 @@ function Game() {
   const game = useSelector(selectGame);
 
   useEffect(() => {
-    new Phaser.Game(config);
+    const game = new Phaser.Game(config);
+    return () => game.destroy(true);
   }, []);
 
   return (

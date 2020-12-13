@@ -11,8 +11,6 @@ import {
 } from '../store/gameSlice';
 import Game from './Game';
 
-const Container = styled.div``;
-
 function Lobby() {
   const game = useSelector(selectGame);
   const dispatch = useDispatch();
@@ -51,5 +49,7 @@ function Lobby() {
     </Container>
   );
 }
+
+const Container = styled.div``;
 
 export default Lobby;
