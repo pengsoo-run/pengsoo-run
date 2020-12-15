@@ -18,7 +18,7 @@ function Welcome() {
       />
       <div className='enter'>
         <div className='title'>PENGSOO RUN</div>
-        <Link to='/game'>
+        <Link to='/lobby'>
           <PopButton text='ENTER' />
         </Link>
       </div>
@@ -28,34 +28,38 @@ function Welcome() {
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
 
   img {
     height: 320px;
-    margin: 20px 40px;
+    margin: 20px;
   }
 
   video {
     position: absolute;
     top: 132px;
-    left: 75px;
+    left: 55px;
     width: 200px;
     border-radius: 20px;
   }
 
   .enter {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 0 0 15px 40px;
 
     .title {
+      padding-right: 10px;
       text-align: right;
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 2.6rem;
     }
 
     a {
       display: flex;
       text-decoration: none;
+      padding-left: 20px;
     }
   }
 `;

@@ -42,6 +42,5 @@ export const {
 } = gameSlice.actions;
 
 export const selectGame = (state: RootState) => state.game;
-export const selectIsPlaying = (state: RootState) => state.game.isPlaying;
 
 export default gameSlice.reducer;

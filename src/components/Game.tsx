@@ -5,19 +5,23 @@ import { resetGame, selectGame } from '../store/gameSlice';
 import { config } from '../phaser-game/config';
 
 import Button from './PopButton';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Game() {
   const game = useSelector(selectGame);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
-    const game = new Phaser.Game(config);
+    if (!game.isPlaying) return history.push('/');
+
+    const phaserGame = new Phaser.Game(config);
+
     return () => {
-      game.destroy(true);
+      phaserGame.destroy(true);
       dispatch(resetGame());
     };
-  }, []);
+  }, [game]);
 
   return (
     <div id='game-container'>
