@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -7,10 +7,15 @@ import socketService from '../store/middleware/socketService';
 import { initGame, resetGame, selectGame, startGame } from '../store/gameSlice';
 
 import Button from './PopButton';
+import QRCode from './QRCode';
 
 function Lobby() {
   const game = useSelector(selectGame);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetGame());
+  }, []);
 
   if (!game.mode) {
     const selectMode = (selected: string) => {
@@ -35,11 +40,12 @@ function Lobby() {
   return (
     <Layout>
       <Title>Waiting for Player</Title>
-      <p>QR CODE</p>
-      <Buttons>
-        <Button text='Select Mode' onClick={() => dispatch(resetGame())} />
-        <Button text='Game Start' onClick={() => dispatch(startGame())} />
-      </Buttons>
+      <div className='waiting'>
+        <QRCode url={`https://${window.location.host}/gamepad/${game.id}`} />
+        <div className='players'>
+          <h1>선수명단</h1>
+        </div>
+      </div>
     </Layout>
   );
 }
@@ -47,7 +53,17 @@ function Lobby() {
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  align-items: flex-start;
+  width: 100%;
+
+  .waiting {
+    display: flex;
+
+    .players {
+      margin-left: 20px;
+      border: 2px solid red;
+    }
+  }
 `;
 
 const Title = styled.div`
@@ -57,12 +73,8 @@ const Title = styled.div`
 
 const ModeList = styled.div`
   display: flex;
+  width: 100%;
   height: 200px;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  height: 100px;
 `;
 
 export default Lobby;

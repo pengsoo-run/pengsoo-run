@@ -4,7 +4,7 @@
   "repository": "https://github.com/pengsoo-run/pengsoo-run.git",
   "author": "Soin Na <carrotcold@gmail.com>",
   "scripts": {
-    "start": "parcel src/index.html -p 3000 --open",
+    "start": "parcel --https src/index.html -p 3000 --open",
     "build": "parcel build src/index.html --out-dir dist",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}"
