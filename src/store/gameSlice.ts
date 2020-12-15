@@ -1,36 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '.';
+import { Game, GameMode, Player } from '../types/game.type';
 
-export type GameMode = '1 Player' | '2 Player';
-type Direction = 'left' | 'right' | 'jump';
-
-interface Player {
-  name: string;
-  socketId: number;
-  role: Direction[];
-}
-
-interface GameState {
-  id: string | null;
-  playerList: Player[];
-  mode?: GameMode;
-  isPlaying: boolean;
-}
-
-const initialState: GameState = {
+const initialState: Game = {
   id: null,
-  playerList: [],
+  mode: null,
   isPlaying: false,
+  playerList: [],
+  remainingRole: [],
 };
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    initGame(state, action: PayloadAction<{ id: string; mode: GameMode }>) {
-      state.id = action.payload.id;
-      state.mode = action.payload.mode;
+    initGame(state, action: PayloadAction<Game>) {
+      return action.payload;
     },
     addPlayer(state, action: PayloadAction<Player>) {
       state.playerList.push(action.payload);
@@ -47,7 +33,6 @@ export const gameSlice = createSlice({
   },
 });
 
-// Actions
 export const {
   initGame,
   addPlayer,
@@ -56,7 +41,7 @@ export const {
   resetGame,
 } = gameSlice.actions;
 
-// Selectors
 export const selectGame = (state: RootState) => state.game;
+export const selectIsPlaying = (state: RootState) => state.game.isPlaying;
 
 export default gameSlice.reducer;

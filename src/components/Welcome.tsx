@@ -6,70 +6,75 @@ function Welcome() {
   const history = useHistory();
 
   return (
-    <Container>
+    <Wrapper>
       <img src='welcome/game-machine.png' alt='game-machine' />
-      <button className='btn' onClick={() => history.push('/game')}>
-        ENTER
-      </button>
       <video
         typeof='video/mp4'
         src='welcome/intro.mp4'
         playsInline
         autoPlay
+        loop
         muted
       />
-    </Container>
+      <div className='enter'>
+        <div className='title'>PENGSOO RUN</div>
+        <button className='enter-button' onClick={() => history.push('/game')}>
+          ENTER
+        </button>
+      </div>
+    </Wrapper>
   );
 }
 
-const Container = styled.div`
+const Wrapper = styled.div`
   position: relative;
-  height: 85%;
-  width: 800px;
-
-  img,
-  video,
-  .btn {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
 
   img {
-    height: 100%;
+    height: 320px;
+    margin: 20px 40px;
   }
 
   video {
-    top: 30vh;
-    height: 30vh;
+    position: absolute;
+    top: 132px;
+    left: 75px;
+    width: 200px;
     border-radius: 20px;
   }
 
-  .btn {
-    z-index: 1;
-    top: 50vh;
-    padding: 0.5rem 4rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 3px solid black;
-    box-shadow: 0 0 0 black;
-    outline: none;
+  .enter {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
 
-    color: inherit;
-    font-family: inherit;
-    font-size: 3rem;
-
-    transition: all 0.2s;
-
-    &:hover {
-      box-shadow: 0.4rem 0.4rem 0 black;
-      transform: translate(-0.4rem, -0.4rem);
-      cursor: pointer;
+    .title {
+      text-align: right;
+      font-size: 3rem;
     }
 
-    &:active {
+    .enter-button {
+      padding: 0.5rem 4rem;
+      background: rgba(255, 255, 255, 0.8);
+      border: 3px solid black;
       box-shadow: 0 0 0 black;
-      transform: translate(0, 0);
+      outline: none;
+
+      color: #14095c;
+      font-family: inherit;
+      font-size: 2.5rem;
+
+      transition: all 0.2s;
+
+      &:hover {
+        box-shadow: 0.4rem 0.4rem 0 black;
+        transform: translate(-0.4rem, -0.4rem);
+        cursor: pointer;
+      }
+
+      &:active {
+        box-shadow: 0 0 0 black;
+        transform: translate(0, 0);
+      }
     }
   }
 `;

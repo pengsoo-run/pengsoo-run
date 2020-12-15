@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectGame } from '../store/gameSlice';
+import { resetGame, selectGame } from '../store/gameSlice';
 import { config } from '../phaser-game/config';
 
 function Game() {
   const game = useSelector(selectGame);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const game = new Phaser.Game(config);
-    return () => game.destroy(true);
+    return () => {
+      game.destroy(true);
+      dispatch(resetGame());
+    };
   }, []);
 
   return (
@@ -17,7 +21,7 @@ function Game() {
       <div id='game-container'>
         <p>{game.id}</p>
         <p>{game.isPlaying}</p>
-        <p>{game.mode}</p>
+        <p>{game.playerCount}</p>
         {game.playerList.map(player => (
           <div key={player.socketId}>
             <p>{player.name}</p>

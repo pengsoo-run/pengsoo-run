@@ -6,6 +6,19 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+    * {
+      animation: fadeIn 0.7s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   }
 `;
 
