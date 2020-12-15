@@ -1,9 +1,8 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
 
 import gameReducer from './gameSlice';
 
-const middleware = [...getDefaultMiddleware(), logger];
+const middleware = [...getDefaultMiddleware()];
 
 export const store = configureStore({
   reducer: {

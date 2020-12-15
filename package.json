@@ -22,11 +22,11 @@
     "styled-reset": "^4.3.3"
   },
   "devDependencies": {
+    "@types/node": "^14.14.13",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.12",
     "@types/react-router-dom": "^5.1.6",
-    "@types/redux-logger": "^3.0.8",
     "@types/socket.io-client": "^1.4.34",
     "@types/styled-components": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
@@ -35,7 +35,6 @@
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-clean-easy": "^1.0.2",
     "parcel-plugin-static-files-copy": "^2.5.0",
-    "redux-logger": "^3.0.6",
     "typescript": "^4.1.2"
   },
   "staticFiles": {

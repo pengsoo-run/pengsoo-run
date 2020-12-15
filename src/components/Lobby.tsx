@@ -6,53 +6,63 @@ import { Game, GameMode } from '../types/game.type';
 import socketService from '../store/middleware/socketService';
 import { initGame, resetGame, selectGame, startGame } from '../store/gameSlice';
 
-import Button from './Button';
+import Button from './PopButton';
 
 function Lobby() {
   const game = useSelector(selectGame);
   const dispatch = useDispatch();
 
-  const selectMode = (selected: string) => {
-    const selectedMode = selected as GameMode;
-    socketService.createGame(selectedMode, (game: Game) => {
-      dispatch(initGame(game));
-    });
-  };
+  if (!game.mode) {
+    const selectMode = (selected: string) => {
+      const selectedMode = selected as GameMode;
+      socketService.createGame(selectedMode, (game: Game) => {
+        dispatch(initGame(game));
+      });
+    };
+
+    return (
+      <Layout>
+        <Title>Select Mode</Title>
+        <ModeList>
+          <Button text={GameMode.P1} onClick={selectMode} />
+          <Button text={GameMode.P2} onClick={selectMode} />
+          <Button text={GameMode.P3} onClick={selectMode} />
+        </ModeList>
+      </Layout>
+    );
+  }
 
   return (
-    <>
-      {!game.mode ? (
-        <SelectMode>
-          <Title>Select Mode</Title>
-          <div className='mode'>
-            <Button text={GameMode.P1} onClick={selectMode} />
-            <Button text={GameMode.P2} onClick={selectMode} />
-            <Button text={GameMode.P3} onClick={selectMode} />
-          </div>
-        </SelectMode>
-      ) : (
-        <WaitingPlayer>
-          <Title>Waiting for Player</Title>
-          <p>QR CODE</p>
-          <Button text='다시 선택하기' onClick={() => dispatch(resetGame())} />
-          <Button text='게임 시작' onClick={() => dispatch(startGame())} />
-        </WaitingPlayer>
-      )}
-    </>
+    <Layout>
+      <Title>Waiting for Player</Title>
+      <p>QR CODE</p>
+      <Buttons>
+        <Button text='Select Mode' onClick={() => dispatch(resetGame())} />
+        <Button text='Game Start' onClick={() => dispatch(startGame())} />
+      </Buttons>
+    </Layout>
   );
 }
 
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
 const Title = styled.div`
   font-size: 3rem;
+  margin-bottom: 20px;
 `;
 
-const SelectMode = styled.div`
-  .mode {
-    display: flex;
-    height: 300px;
-  }
+const ModeList = styled.div`
+  display: flex;
+  height: 200px;
 `;
 
-const WaitingPlayer = styled.div``;
+const Buttons = styled.div`
+  display: flex;
+  height: 100px;
+`;
 
 export default Lobby;
