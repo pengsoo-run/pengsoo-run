@@ -1,7 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '.';
 import { Game, GameMode, Player } from '../types/game.type';
+
+const createGame = createAction<Game>('game/create');
 
 const initialState: Game = {
   id: null,
