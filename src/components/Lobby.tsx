@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { GameMode } from '~/types/game.type';
 import { createGame, resetGame, selectGame } from '~/store/gameSlice';
 
-import SelectMode from './SelectMode';
+import ModeSelection from './ModeSelection';
 import WaitingPlayer from './WaitingPlayer';
 
 function Lobby() {
@@ -23,8 +23,10 @@ function Lobby() {
 
   return (
     <Layout>
-      {!game.mode && <SelectMode handleClick={selectMode} />}
-      {game.id && <WaitingPlayer gameId={game.id} />}
+      {!game.mode && <ModeSelection handleClick={selectMode} />}
+      {game.id && (
+        <WaitingPlayer gameId={game.id} playerList={game.playerList} />
+      )}
     </Layout>
   );
 }
@@ -37,7 +39,7 @@ const Layout = styled.div`
 
   h1 {
     font-size: 3rem;
-    margin-bottom: 20px;
+    margin: 10px 0;
   }
 `;
 
