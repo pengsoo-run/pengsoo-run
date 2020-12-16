@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetGame, selectGame } from '../store/gameSlice';
 import { config } from '../phaser-game/config';
 
-import Button from './PopButton';
+import PopButton from './PopButton';
 import { Link, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 function Game() {
   const game = useSelector(selectGame);
@@ -13,7 +14,7 @@ function Game() {
   const history = useHistory();
 
   useEffect(() => {
-    if (!game.isPlaying) return history.push('/');
+    // if (!game.isPlaying) return history.push('/');
 
     const phaserGame = new Phaser.Game(config);
 
@@ -24,19 +25,30 @@ function Game() {
   }, [game]);
 
   return (
-    <div id='game-container'>
-      <Link to='/'>
-        <Button text='Finish Game' />
-      </Link>
-      <p>{game.id}</p>
-      {game.playerList.map(player => (
-        <div key={player.id}>
-          <p>{player.id}</p>
-          <p>{player.role}</p>
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <div id='game-container' />
+      <GameUI>
+        <Link to='/'>
+          <PopButton size='20px' text='Finish Game' />
+        </Link>
+        <p>{game.id}</p>
+        {game.playerList.map(player => (
+          <div key={player.id}></div>
+        ))}
+      </GameUI>
+    </Layout>
   );
 }
+
+const Layout = styled.div`
+  position: relative;
+`;
+
+const GameUI = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 2;
+`;
 
 export default Game;

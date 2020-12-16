@@ -14,13 +14,13 @@ function QRCode({ url }: QRCodeProps) {
       bgColor={'transparent'}
       fgColor='#FFFFFF'
       imageSettings={{
-        src: 'welcome/peng-hi.png',
+        src: 'lobby/peng-hi.png',
         width: 80,
         height: 80,
         excavate: true,
       }}
       level='Q'
-      style={{ margin: '5px 10px' }}
+      style={{ margin: '10px 10px 20px 10px' }}
     />
   );
 }

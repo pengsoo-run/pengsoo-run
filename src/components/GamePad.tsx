@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GameRole } from '~/types/game.type';
-import GameButtons from './GameButtons';
+import GamePadButton from './GamePadButton';
 
 interface MatchParams {
   id: string;
@@ -19,7 +19,7 @@ function GamePad({ match }: RouteComponentProps<MatchParams>) {
 
   return (
     <Wrapper>
-      <GameButtons role={role} />
+      <GamePadButton role={role} />
     </Wrapper>
   );
 }

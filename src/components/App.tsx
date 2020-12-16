@@ -1,9 +1,10 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-import { Reset } from 'styled-reset';
+import styled, { ThemeProvider } from 'styled-components';
 
-import GlobalStyle from './styles/globalStyle';
+import { theme } from './styles/theme';
+import { flexCenter } from './styles/mixin';
+import { GlobalStyle } from './styles/globalStyle';
 
 import Welcome from './Welcome';
 import Lobby from './Lobby';
@@ -13,17 +14,18 @@ import GamePad from './GamePad';
 function App() {
   return (
     <Wrapper>
-      <Reset />
       <GlobalStyle />
-      <div className='content'>
-        <Switch>
-          <Route exact path='/' component={Welcome} />
-          <Route path='/lobby' component={Lobby} />
-          <Route path='/game' component={Game} />
-          <Route path='/gamepad/:id' component={GamePad} />
-          <Redirect to='/' />
-        </Switch>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className='content'>
+          <Switch>
+            <Route exact path='/' component={Welcome} />
+            <Route path='/lobby' component={Lobby} />
+            <Route path='/game' component={Game} />
+            <Route path='/gamepad/:id' component={GamePad} />
+            <Redirect to='/' />
+          </Switch>
+        </div>
+      </ThemeProvider>
     </Wrapper>
   );
 }
@@ -31,18 +33,19 @@ function App() {
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  display: flex;
+  ${flexCenter}
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 
   .content {
-    width: 720px;
-    height: 450px;
+    width: 800px;
+    max-height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #061763;
-    background-image: url('welcome/game-pad.png');
+    background-image: url('lobby/game-pad.png');
     background-position: center;
     background-size: cover;
     box-shadow: 0 6px 24px 0 rgba(44, 39, 56, 0.4),

@@ -7,10 +7,10 @@ import PopButton from './PopButton';
 function Welcome() {
   return (
     <Wrapper>
-      <img src='welcome/game-machine.png' alt='game-machine' />
+      <img src='lobby/game-machine.png' alt='game-machine' />
       <video
         typeof='video/mp4'
-        src='welcome/intro.mp4'
+        src='lobby/intro.mp4'
         playsInline
         autoPlay
         loop
@@ -31,15 +31,15 @@ const Wrapper = styled.div`
   display: flex;
 
   img {
-    height: 320px;
+    height: 400px;
     margin: 20px;
   }
 
   video {
     position: absolute;
-    top: 132px;
-    left: 55px;
-    width: 200px;
+    top: 160px;
+    left: 63px;
+    width: 250px;
     border-radius: 20px;
   }
 
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    margin: 0 0 15px 40px;
+    margin: 0 10px 15px 80px;
 
     .title {
       padding-right: 10px;

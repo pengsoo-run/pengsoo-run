@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import { GameRole } from '../types/game.type';
 
-interface GameButtonsProps {
+interface GamePadButtonProps {
   role: GameRole;
 }
 
-function GameButtons({ role }: GameButtonsProps) {
+function GamePadButton({ role }: GamePadButtonProps) {
   switch (role) {
     case GameRole.ALL:
       return (
@@ -109,7 +109,7 @@ const StyledButton = styled.button`
   &.jump {
     background: #df4242;
     color: #fff;
-    border: 1px solid #a01b1b;
+    border: 3px solid #a01b1b;
     box-shadow: 0px 12px 0px #a01b1b;
     text-shadow: 1px 1px 1px #a01b1b;
   }
@@ -118,10 +118,10 @@ const StyledButton = styled.button`
   &.right {
     background: #f57936;
     color: #fff;
-    border: 1px solid #bc4809;
+    border: 3px solid #bc4809;
     box-shadow: 0px 12px 0px #bc4809;
     text-shadow: 1px 1px 1px #bc4809;
   }
 `;
 
-export default GameButtons;
+export default GamePadButton;

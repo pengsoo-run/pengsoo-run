@@ -4,14 +4,16 @@ import styled from 'styled-components';
 interface PopButtonProps {
   text: string;
   size?: string;
+  children?: React.ReactNode;
   onClick?: (text: string) => void;
 }
 
-function PopButton({ text, size, onClick }: PopButtonProps) {
+function PopButton({ text, size, children, onClick }: PopButtonProps) {
   return (
     <StyledButton
       onClick={onClick && (() => onClick(text))}
       style={{ fontSize: size }}>
+      {children}
       {text}
     </StyledButton>
   );
@@ -26,6 +28,7 @@ const StyledButton = styled.button`
   border: 3px solid black;
   box-shadow: 0 0 0 black;
   outline: none;
+  user-select: none;
 
   color: #14095c;
   font-family: inherit;
@@ -45,7 +48,7 @@ const StyledButton = styled.button`
 `;
 
 PopButton.defaultProps = {
-  size: '2rem',
+  size: '2.4rem',
 };
 
 export default PopButton;
