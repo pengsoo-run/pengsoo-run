@@ -1,32 +1,19 @@
 import { Middleware, MiddlewareAPI, Dispatch, Action } from 'redux';
-import io from 'socket.io-client';
 
-import { Game, GameMode } from '../../types/game.type';
+import SocketService from './socketService';
 import { initGame } from '../gameSlice';
 
-function createSocketMiddleware(url: string): Middleware {
+export function createSocketMiddleware(url: string): Middleware {
   return ({ dispatch }: MiddlewareAPI) => {
-    const socket = io(url);
+    const serviceInstance = new SocketService(url);
 
-    socket.on('connect', () => {
-      console.log('socket connected :', socket.id);
-    });
-
-    socket.on('createdGame', (game: Game) => {
-      dispatch(initGame(game));
-    });
-
-    socket.on('joinedGame', () => {});
-
-    socket.on('destroyedGame', () => {});
-
-    socket.on('updatedPlayer', () => {});
+    serviceInstance.init();
+    serviceInstance.subscribe(dispatch);
 
     return (next: Dispatch) => (action: Action) => {
-      if (action.type == 'SEND_WEBSOCKET_MESSAGE') {
-        // socket.emit(action.payload);
-        return;
-      }
+      const isIntercepted = serviceInstance.interceptAction(action);
+
+      if (isIntercepted) return;
 
       return next(action);
     };

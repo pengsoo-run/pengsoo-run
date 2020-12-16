@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-
 import styled from 'styled-components';
 import { Reset } from 'styled-reset';
-import GlobalStyle from './styles/globalStyle';
 
-import socketService from '../store/middleware/socketService';
+import GlobalStyle from './styles/globalStyle';
 
 import Welcome from './Welcome';
 import Lobby from './Lobby';
@@ -13,11 +11,6 @@ import Game from './Game';
 import GamePad from './GamePad';
 
 function App() {
-  useEffect(() => {
-    socketService.init();
-    return () => socketService.disconnect();
-  }, []);
-
   return (
     <Wrapper>
       <Reset />

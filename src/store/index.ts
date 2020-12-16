@@ -1,8 +1,13 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
+import { createSocketMiddleware } from './middleware';
 import gameReducer from './gameSlice';
 
-const middleware = [...getDefaultMiddleware()];
+const serverUrl = process.env.SERVER_URL as string;
+const middleware = [
+  ...getDefaultMiddleware(),
+  createSocketMiddleware(serverUrl),
+];
 
 export const store = configureStore({
   reducer: {
