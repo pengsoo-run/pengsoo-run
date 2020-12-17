@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
-    "strict": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "esModuleInterop": true,
-    "sourceMap": true,
-    "noImplicitAny": true,
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "jsx": "react",
+    "noEmit": true,
     "baseUrl": "./src",
     "paths": {
       "~/*": ["./*"]
-    },
-    "typeRoots": ["node_modules/@types", "node_module/phaser/types"],
-    "types": ["phaser"]
+    }
   },
   "include": ["./src/**/*"],
   "exclude": ["./node_modules/**/*"]
