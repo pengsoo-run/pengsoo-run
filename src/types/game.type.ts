@@ -4,7 +4,14 @@ export const enum GameMode {
   P3 = '3 Player',
 }
 
-export const enum GameRole {
+export const enum GameProgress {
+  WAITING = 'waiting',
+  PLAYING = 'playing',
+  PAUSE = 'pause',
+  GAMEOVER = 'gameover',
+}
+
+export const enum PlayerRole {
   ALL = 'all',
   LR = 'left-right',
   J = 'jump',
@@ -13,14 +20,13 @@ export const enum GameRole {
 }
 
 export interface Player {
-  id: string;
-  role: GameRole;
+  id: string | null;
+  role: PlayerRole | null;
 }
 
 export interface Game {
-  id: string | null;
+  id: string;
   mode: GameMode | null;
-  isPlaying: boolean;
+  progress: GameProgress;
   playerList: Player[];
-  remainingRole: GameRole[];
 }
