@@ -9,7 +9,7 @@ enum PengsooState {
   hurt,
 }
 
-type direction = 'left' | 'right' | 'jump';
+type Button = 'left' | 'right' | 'jump';
 
 interface isPressed {
   left: boolean;
@@ -61,12 +61,12 @@ export class Pengsoo extends Phaser.GameObjects.Container {
       jump: false,
     };
 
-    serviceInstance.socket.on('buttonDown', (data: direction) => {
-      this.isPressed[data] = true;
+    serviceInstance.socket.on('buttonDown', (button: Button) => {
+      this.isPressed[button] = true;
     });
 
-    serviceInstance.socket.on('buttonUp', (data: direction) => {
-      this.isPressed[data] = false;
+    serviceInstance.socket.on('buttonUp', (button: Button) => {
+      this.isPressed[button] = false;
     });
   }
 

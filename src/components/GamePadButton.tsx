@@ -6,7 +6,6 @@ import { buttonDown, buttonUp } from '~/store/playerSlice';
 import { PlayerRole } from '../types/game.type';
 
 interface GamePadButtonProps {
-  gameId: string;
   role: PlayerRole;
 }
 
@@ -14,17 +13,15 @@ type pressEvent =
   | React.MouseEvent<HTMLButtonElement>
   | React.TouchEvent<HTMLButtonElement>;
 
-function GamePadButton({ gameId, role }: GamePadButtonProps) {
+function GamePadButton({ role }: GamePadButtonProps) {
   const dispatch = useDispatch();
 
-  const onPressDown = (ev: pressEvent) => {
-    const button = ev.currentTarget.textContent;
-    dispatch(buttonDown({ gameId, button }));
+  const onPressDown = (ev: pressEvent): void => {
+    dispatch(buttonDown(ev.currentTarget.textContent));
   };
 
-  const onPressUp = (ev: pressEvent) => {
-    const button = ev.currentTarget.textContent;
-    dispatch(buttonUp({ gameId, button }));
+  const onPressUp = (ev: pressEvent): void => {
+    dispatch(buttonUp(ev.currentTarget.textContent));
   };
 
   let roleList = [];

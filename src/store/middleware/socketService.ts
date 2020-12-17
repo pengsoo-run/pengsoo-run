@@ -8,7 +8,7 @@ import {
   updateGameProgress,
   updatePlayerList,
 } from '../gameSlice';
-import { createPlayer } from '../playerSlice';
+import { createPlayer, destroyPlayer } from '../playerSlice';
 
 export default class SocketService {
   public socket: SocketIOClient.Socket = {} as SocketIOClient.Socket;
@@ -29,6 +29,7 @@ export default class SocketService {
 
     this.listen('createGame', initGame);
     this.listen('joinGame', createPlayer);
+    this.listen('leaveGame', destroyPlayer);
     this.listen('updatePlayerList', updatePlayerList);
     this.listen('updateGameProgress', updateGameProgress);
     this.listen('destroyGame', resetGame);

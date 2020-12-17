@@ -13,6 +13,7 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     createPlayer(state, action: PayloadAction<Player>) {
+      console.log('✅   createPlayer   action.payloa', action.payloa);
       return action.payload;
     },
     destroyPlayer(state) {
@@ -24,6 +25,7 @@ export const playerSlice = createSlice({
 export const { createPlayer, destroyPlayer } = playerSlice.actions;
 
 export const joinGame = createAction<string>('event/joinGame');
+export const leaveGame = createAction<string>('event/leaveGame');
 export const buttonDown = createAction<any>('event/buttonDown');
 export const buttonUp = createAction<any>('event/buttonUp');
 
