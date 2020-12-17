@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 import Setting from './consts/Setting';
 
-import { PreloadScene } from './scenes/preloadScene';
+import { PreloadScene } from './scenes/PreloadScene';
 import { MainScene } from './scenes/mainScene';
 
 export const config: Phaser.Types.Core.GameConfig = {
@@ -13,7 +13,7 @@ export const config: Phaser.Types.Core.GameConfig = {
   parent: 'game-container',
   physics: {
     default: 'arcade',
-    arcade: { debug: true },
+    // arcade: { debug: true },
   },
   scene: [PreloadScene, MainScene],
 };

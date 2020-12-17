@@ -1,6 +1,7 @@
 {
   "name": "pengsoo-run",
   "version": "1.0.0",
+  "description": "Avoids UnhandledPromiseRejectionWarning and PromiseRejectionHandledWarning",
   "repository": "https://github.com/pengsoo-run/pengsoo-run.git",
   "author": "Soin Na <carrotcold@gmail.com>",
   "scripts": {
