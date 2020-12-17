@@ -31,9 +31,9 @@ function App() {
 }
 
 const Wrapper = styled.div`
+  ${flexCenter}
   width: 100vw;
   height: 100vh;
-  ${flexCenter}
 `;
 
 const Content = styled.div`

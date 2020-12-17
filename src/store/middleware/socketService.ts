@@ -1,9 +1,9 @@
 import io from 'socket.io-client';
 
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
-import { Game, GameMode } from '../../types/game.type';
 import {
   initGame,
+  onError,
   resetGame,
   updateGameProgress,
   updatePlayerList,
@@ -32,6 +32,8 @@ export default class SocketService {
     this.listen('updatePlayerList', updatePlayerList);
     this.listen('updateGameProgress', updateGameProgress);
     this.listen('destroyGame', resetGame);
+
+    this.listen('error', onError);
   }
 
   public interceptAction(action: AnyAction): boolean {

@@ -9,6 +9,7 @@ const theme: DefaultTheme = {
     orange: '#f57936',
     darkorange: '#bc4809',
     darkblue: '#14095c',
+    yellow: '#d69f20',
   },
 };
 

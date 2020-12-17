@@ -29,4 +29,5 @@ export interface Game {
   mode: GameMode | null;
   progress: GameProgress;
   playerList: Player[];
+  error: string | null;
 }

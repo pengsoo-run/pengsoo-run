@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 
+import { GameProgress } from '~/types/game.type';
 import { resetGame, selectGame } from '../store/gameSlice';
 import { config } from '../phaser-game/config';
 
 import PopButton from './PopButton';
-import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { GameProgress } from '~/types/game.type';
+import ErrorBox from './ErrorBox';
 
 function Game() {
   const history = useHistory();
@@ -15,7 +16,7 @@ function Game() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (game.progress !== GameProgress.PLAYING) return history.push('/');
+    // if (game.progress !== GameProgress.PLAYING) return history.push('/');
 
     const phaserGame = new Phaser.Game(config);
 
@@ -27,6 +28,7 @@ function Game() {
 
   return (
     <Layout>
+      {game.error && <ErrorBox message={game.error} />}
       <div id='game-container' />
       <GameUI>
         <Link to='/'>
