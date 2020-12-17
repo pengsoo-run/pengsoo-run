@@ -1,7 +1,7 @@
 {
   "name": "pengsoo-run",
   "version": "1.0.0",
-  "description": "Avoids UnhandledPromiseRejectionWarning and PromiseRejectionHandledWarning",
+  "description": "Infinite Running Action Web Game",
   "repository": "https://github.com/pengsoo-run/pengsoo-run.git",
   "author": "Soin Na <carrotcold@gmail.com>",
   "scripts": {
