@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { joinGame, selectPlayer } from '~/store/playerSlice';
+import { joinGame, leaveGame, selectPlayer } from '~/store/playerSlice';
 import { selectError, selectGameProgress } from '~/store/gameSlice';
 
 import GamePadButton from './GamePadButton';
@@ -23,7 +23,9 @@ function GamePad({ match }: RouteComponentProps<MatchParams>) {
   useEffect(() => {
     dispatch(joinGame(id));
 
-    // return () => dispatch(leaveGame(id));
+    return () => {
+      dispatch(leaveGame(id));
+    };
   }, []);
 
   return (

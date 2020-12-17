@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { GameMode } from '~/types/game.type';
 import { createGame, resetGame, selectGame } from '~/store/gameSlice';
 
 import ModeSelection from './ModeSelection';
@@ -17,7 +16,7 @@ function Lobby() {
   }, []);
 
   const selectMode = (selected: string) => {
-    const selectedMode = selected as GameMode;
+    const selectedMode = selected;
     dispatch(createGame(selectedMode));
   };
 

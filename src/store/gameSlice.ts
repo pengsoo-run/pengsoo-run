@@ -20,6 +20,7 @@ export const gameSlice = createSlice({
     },
     updatePlayerList(state, action: PayloadAction<Player[]>) {
       state.playerList = action.payload;
+      console.log('✅   updatePlayerList   action.payload', action.payload);
       state.error = null;
     },
     updateGameProgress(state, action: PayloadAction<GameProgress>) {
@@ -48,5 +49,6 @@ export const selectGameProgress = (state: RootState) => state.game.progress;
 export const selectError = (state: RootState) => state.game.error;
 
 export const createGame = createAction<string>('event/createGame');
+export const destroyGame = createAction<string>('event/destroyGame');
 
 export default gameSlice.reducer;
