@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import Setting from './consts/Setting';
 
 import { PreloadScene } from './scenes/PreloadScene';
-import { MainScene } from './scenes/mainScene';
+import { MainScene } from './scenes/MainScene';
 
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Pengsoo Run',
