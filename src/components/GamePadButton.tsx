@@ -1,101 +1,123 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { GameRole } from '../types/game.type';
+import { buttonDown, buttonUp } from '~/store/playerSlice';
+import { PlayerRole } from '../types/game.type';
 
 interface GamePadButtonProps {
-  role: GameRole;
+  gameId: string;
+  role: PlayerRole;
 }
 
-function GamePadButton({ role }: GamePadButtonProps) {
+type pressEvent =
+  | React.MouseEvent<HTMLButtonElement>
+  | React.TouchEvent<HTMLButtonElement>;
+
+function GamePadButton({ gameId, role }: GamePadButtonProps) {
+  const dispatch = useDispatch();
+
+  const onPressDown = (ev: pressEvent) => {
+    const button = ev.currentTarget.textContent;
+    dispatch(buttonDown({ gameId, button }));
+  };
+
+  const onPressUp = (ev: pressEvent) => {
+    const button = ev.currentTarget.textContent;
+    dispatch(buttonUp({ gameId, button }));
+  };
+
+  let roleList = [];
+
   switch (role) {
-    case GameRole.ALL:
-      return (
-        <LayoutThree>
-          <StyledButton className={GameRole.J}>{GameRole.J}</StyledButton>
-          <StyledButton className={GameRole.L}>{GameRole.L}</StyledButton>
-          <StyledButton className={GameRole.R}>{GameRole.R}</StyledButton>
-        </LayoutThree>
-      );
-    case GameRole.LR:
-      return (
-        <LayoutTwo>
-          <StyledButton className={GameRole.L}>{GameRole.L}</StyledButton>
-          <StyledButton className={GameRole.R}>{GameRole.R}</StyledButton>
-        </LayoutTwo>
-      );
-    case GameRole.J:
-    case GameRole.L:
-    case GameRole.R:
-      return (
-        <LayoutOne>
-          <StyledButton className={role}>{role}</StyledButton>
-        </LayoutOne>
-      );
+    case PlayerRole.ALL:
+      roleList = [PlayerRole.L, PlayerRole.R, PlayerRole.J];
+      break;
+    case PlayerRole.LR:
+      roleList = [PlayerRole.L, PlayerRole.R];
+      break;
+    default:
+      roleList = [role];
+      break;
   }
+
+  return (
+    <Layout className={role}>
+      {roleList.map(role => (
+        <StyledButton
+          className={role}
+          onMouseDown={onPressDown}
+          onTouchStart={onPressDown}
+          onMouseUp={onPressUp}
+          onTouchEnd={onPressUp}>
+          {role}
+        </StyledButton>
+      ))}
+    </Layout>
+  );
 }
 
-const LayoutThree = styled.div`
-  .jump,
-  .left,
-  .right {
-    bottom: 15vh;
-    width: 20vw;
-    height: 20vw;
+const Layout = styled.div`
+  &.all {
+    .left {
+      left: 5vw;
+    }
+
+    .right {
+      left: 28vw;
+    }
+
+    .jump {
+      right: 5vw;
+    }
+
+    button {
+      width: 20vw;
+      height: 20vw;
+      max-width: 35vmin;
+      max-height: 35vmin;
+      font-size: 8vmin;
+    }
   }
 
-  .jump {
-    right: 5vw;
+  &.left-right {
+    .left {
+      left: 5vw;
+    }
+
+    .right {
+      right: 5vw;
+    }
+
+    button {
+      width: 30vw;
+      height: 30vw;
+      font-size: 12vmin;
+    }
   }
 
-  .left {
-    left: 5vw;
-  }
-
-  .right {
-    left: 28vw;
-  }
-`;
-
-const LayoutTwo = styled.div`
-  .left,
-  .right {
-    bottom: 15vh;
-    width: 30vw;
-    height: 30vw;
-  }
-
-  .left {
-    left: 5vw;
-  }
-
-  .right {
-    right: 5vw;
-  }
-`;
-
-const LayoutOne = styled.div`
-  button {
-    bottom: 15vh;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: 60vmin;
-    height: 60vmin;
-    font-size: 12vmin;
+  &.left,
+  &.right,
+  &.jump {
+    button {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 70vmin;
+      height: 70vmin;
+      font-size: 20vmin;
+    }
   }
 `;
 
 const StyledButton = styled.button`
   position: absolute;
-  width: 10rem;
-  height: 10rem;
+  bottom: 15vh;
   outline: none;
   border: none;
   border-radius: 50%;
   font-family: inherit;
   text-decoration: none;
-  font-size: 6vw;
   user-select: none;
   transform: translateY(0px);
   transition: All 0.06s ease-in-out;

@@ -1,17 +1,16 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import { createSocketMiddleware } from './middleware';
-import gameReducer from './gameSlice';
 
-const serverUrl = process.env.SERVER_URL as string;
-const middleware = [
-  ...getDefaultMiddleware(),
-  createSocketMiddleware(serverUrl),
-];
+import gameReducer from './gameSlice';
+import playerReducer from './playerSlice';
+
+const middleware = [...getDefaultMiddleware(), createSocketMiddleware()];
 
 export const store = configureStore({
   reducer: {
     game: gameReducer,
+    player: playerReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV !== 'production',

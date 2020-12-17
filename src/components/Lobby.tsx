@@ -23,9 +23,14 @@ function Lobby() {
 
   return (
     <Layout>
-      {!game.mode && <ModeSelection handleClick={selectMode} />}
-      {game.id && (
-        <WaitingPlayer gameId={game.id} playerList={game.playerList} />
+      {game.mode ? (
+        <WaitingPlayer
+          gameId={game.id}
+          mode={game.mode}
+          playerList={game.playerList}
+        />
+      ) : (
+        <ModeSelection handleClick={selectMode} />
       )}
     </Layout>
   );

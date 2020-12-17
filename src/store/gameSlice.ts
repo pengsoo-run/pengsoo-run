@@ -1,14 +1,13 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '.';
-import { Game, GameMode, Player } from '../types/game.type';
+import { Game, GameMode, GameProgress, Player } from '../types/game.type';
 
 const initialState: Game = {
-  id: null,
+  id: '',
   mode: null,
-  isPlaying: false,
+  progress: GameProgress.WAITING,
   playerList: [],
-  remainingRole: [],
 };
 
 export const gameSlice = createSlice({
@@ -18,11 +17,11 @@ export const gameSlice = createSlice({
     initGame(state, action: PayloadAction<Game>) {
       return action.payload;
     },
-    startGame(state) {
-      state.isPlaying = true;
-    },
     updatePlayerList(state, action: PayloadAction<Player[]>) {
       state.playerList = action.payload;
+    },
+    updateGameProgress(state, action: PayloadAction<GameProgress>) {
+      state.progress = action.payload;
     },
     resetGame(state) {
       return initialState;
@@ -32,14 +31,14 @@ export const gameSlice = createSlice({
 
 export const {
   initGame,
-  startGame,
   updatePlayerList,
+  updateGameProgress,
   resetGame,
 } = gameSlice.actions;
 
-export const createGame = createAction<GameMode>('event/createGame');
-export const joinGame = createAction<Game>('event/joinGame');
-
 export const selectGame = (state: RootState) => state.game;
+export const selectGameProgress = (state: RootState) => state.game.progress;
+
+export const createGame = createAction<GameMode>('event/createGame');
 
 export default gameSlice.reducer;

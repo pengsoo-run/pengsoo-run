@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { serviceInstance } from '~/store/middleware';
 
 import Setting from '../consts/Setting';
 
@@ -8,13 +9,21 @@ enum PengsooState {
   hurt,
 }
 
+type direction = 'left' | 'right' | 'jump';
+
+interface isPressed {
+  left: boolean;
+  right: boolean;
+  jump: boolean;
+}
+
 export class Pengsoo extends Phaser.GameObjects.Container {
   private running: Phaser.GameObjects.Sprite;
   private shadow: Phaser.GameObjects.Ellipse;
   private jumpTimer: number = 0;
   private hurtTimer: number = 0;
   private text!: Phaser.GameObjects.BitmapText;
-  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private isPressed: isPressed;
 
   private currentState = PengsooState.Running;
 
@@ -46,14 +55,26 @@ export class Pengsoo extends Phaser.GameObjects.Container {
     body.setCollideWorldBounds(true);
     scene.physics.world.setBounds(0, 180, Setting.WIDTH, Setting.HEIGHT - 200);
 
-    this.cursors = scene.input.keyboard.createCursorKeys();
+    this.isPressed = {
+      left: false,
+      right: false,
+      jump: false,
+    };
+
+    serviceInstance.socket.on('buttonDown', (data: direction) => {
+      this.isPressed[data] = true;
+    });
+
+    serviceInstance.socket.on('buttonUp', (data: direction) => {
+      this.isPressed[data] = false;
+    });
   }
 
   private preUpdate(): void {
     const body = this.body as Phaser.Physics.Arcade.Body;
 
     if (this.currentState === PengsooState.Running) {
-      if (this.cursors.up?.isDown || this.cursors.space?.isDown) {
+      if (this.isPressed.jump) {
         this.currentState = PengsooState.Jumping;
         this.jumpTimer = 50;
         this.running.play('pengsoo-jump');
@@ -88,12 +109,11 @@ export class Pengsoo extends Phaser.GameObjects.Container {
       }
     }
 
-    // TODO: keyboard input -> socket event
-    if (this.cursors.left?.isDown) {
+    if (this.isPressed.left) {
       body.setVelocityX(-300);
-    } else if (this.cursors.right?.isDown) {
+    } else if (this.isPressed.right) {
       body.setVelocityX(300);
-    } else if (this.cursors.left?.isUp || this.cursors.right?.isUp) {
+    } else if (!this.isPressed.left || !this.isPressed.right) {
       body.setVelocityX(0);
     }
   }

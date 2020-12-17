@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GameRole } from '~/types/game.type';
+import { joinGame, selectPlayer } from '~/store/playerSlice';
+import { selectGameProgress } from '~/store/gameSlice';
+
 import GamePadButton from './GamePadButton';
 
 interface MatchParams {
@@ -10,16 +13,19 @@ interface MatchParams {
 }
 
 function GamePad({ match }: RouteComponentProps<MatchParams>) {
-  // const { id } = match.params;
-  const [role, setRole] = useState<GameRole>(GameRole.ALL);
+  const { id } = match.params;
+  const player = useSelector(selectPlayer);
+  const gameProgress = useSelector(selectGameProgress);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setRole(GameRole.ALL);
+    dispatch(joinGame(id));
   }, []);
 
   return (
     <Wrapper>
-      <GamePadButton role={role} />
+      <p>{gameProgress}</p>
+      {player.role && <GamePadButton gameId={id} role={player.role} />}
     </Wrapper>
   );
 }

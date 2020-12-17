@@ -1,12 +1,12 @@
 import { Middleware, MiddlewareAPI, Dispatch, Action } from 'redux';
 
 import SocketService from './socketService';
-import { initGame } from '../gameSlice';
 
-export function createSocketMiddleware(url: string): Middleware {
+const serverUrl = process.env.SERVER_URL as string;
+export const serviceInstance = new SocketService(serverUrl);
+
+export function createSocketMiddleware(): Middleware {
   return ({ dispatch }: MiddlewareAPI) => {
-    const serviceInstance = new SocketService(url);
-
     serviceInstance.init();
     serviceInstance.subscribe(dispatch);
 

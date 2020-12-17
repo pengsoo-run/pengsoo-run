@@ -2,11 +2,16 @@ import io from 'socket.io-client';
 
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
 import { Game, GameMode } from '../../types/game.type';
-
-import { initGame, resetGame, startGame, updatePlayerList } from '../gameSlice';
+import {
+  initGame,
+  resetGame,
+  updateGameProgress,
+  updatePlayerList,
+} from '../gameSlice';
+import { createPlayer } from '../playerSlice';
 
 export default class SocketService {
-  private socket: SocketIOClient.Socket = {} as SocketIOClient.Socket;
+  public socket: SocketIOClient.Socket = {} as SocketIOClient.Socket;
   private dispatch!: Dispatch;
 
   constructor(private url: string) {}
@@ -14,9 +19,7 @@ export default class SocketService {
   public init(): SocketService {
     this.socket = io(this.url);
 
-    this.socket.on('connect', () => {
-      console.log('socket connected : ', this.socket.id);
-    });
+    this.socket.on('connect', () => console.log('socket connected'));
 
     return this;
   }
@@ -25,8 +28,9 @@ export default class SocketService {
     this.dispatch = dispatch;
 
     this.listen('createGame', initGame);
-    this.listen('startGame', startGame);
+    this.listen('joinGame', createPlayer);
     this.listen('updatePlayerList', updatePlayerList);
+    this.listen('updateGameProgress', updateGameProgress);
     this.listen('destroyGame', resetGame);
   }
 
@@ -35,16 +39,17 @@ export default class SocketService {
 
     if (prefix === 'event') {
       this.socket.emit(name, action.payload);
-      console.log('✅intercept ', name, action.payload);
       return true;
+    }
+
+    if (name === 'resetGame') {
+      this.removeGameListener();
     }
 
     return false;
   }
 
   private listen(ev: string, action: ActionCreator<AnyAction>) {
-    console.log('리스너 on ', ev);
-
     this.socket.on(ev, (payload: any) => {
       this.dispatch(action(payload));
     });
@@ -55,20 +60,8 @@ export default class SocketService {
     return [splited[0], splited[1]];
   }
 
-  public createGame(mode: GameMode, callback: (arg: Game) => void): void {
-    this.socket.emit('create-game', mode, callback);
-  }
-
-  // public joinGame(gameId: string, callback: (arg: Game) => void): void {
-  //   this.socket.emit('join-game', gameId, callback);
-  // }
-
-  // public onMessage(callback: (arg: any) => void): void {
-  //   this.listen('message');
-  // }
-
-  public disconnect(): void {
-    console.log('disconnect!');
-    this.socket.disconnect();
+  private removeGameListener(): void {
+    this.socket.off('buttonDown');
+    this.socket.off('buttonUp');
   }
 }

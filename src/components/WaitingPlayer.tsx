@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Player } from '~/types/game.type';
+import { GameMode, Player } from '~/types/game.type';
+import { flexCenter } from './styles/mixin';
 
 import QRCode from './QRCode';
 import PopButton from './PopButton';
-import { useHistory } from 'react-router-dom';
+import RoleList from './RoleList';
 
 interface WaitingPlayerProps {
   gameId: string;
   playerList: Player[];
+  mode: GameMode;
 }
 
-function WaitingPlayer({ gameId, playerList }: WaitingPlayerProps) {
+function WaitingPlayer({ gameId, playerList, mode }: WaitingPlayerProps) {
   const history = useHistory();
   const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    // for (const player of playerList) {
-    //   if (!player.id) return setIsReady(false);
-    // }
+    for (const player of playerList) {
+      if (!player.id) return setIsReady(false);
+    }
+
     setIsReady(true);
   }, [playerList]);
 
@@ -28,26 +32,31 @@ function WaitingPlayer({ gameId, playerList }: WaitingPlayerProps) {
   return (
     <>
       <h1>Waiting for Player</h1>
-      <PlayerList>
+      <Wrapper>
         <QRCode url={`https://${window.location.host}/gamepad/${gameId}`} />
         <div className='players'>
-          {playerList.map((player, idx) => (
-            <div key={player.id || idx}>{player.role}</div>
-          ))}
-          {isReady && <PopButton text='GAME START' onClick={moveToGamePath} />}
+          <RoleList size={110} mode={mode} />
+          {isReady ? (
+            <PopButton text='GAME START' onClick={moveToGamePath} />
+          ) : (
+            <PopButton text='Waiting...' disable />
+          )}
         </div>
-      </PlayerList>
+      </Wrapper>
     </>
   );
 }
 
-const PlayerList = styled.div`
+const Wrapper = styled.div`
   display: flex;
 
   .players {
-    display: flex;
+    ${flexCenter}
     flex-direction: column;
-    margin-left: 20px;
+    align-items: stretch;
+    width: 400px;
+    padding: 30px 10px;
+    margin: 0 0 10px 20px;
   }
 `;
 

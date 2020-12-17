@@ -7,14 +7,15 @@ import { config } from '../phaser-game/config';
 import PopButton from './PopButton';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { GameProgress } from '~/types/game.type';
 
 function Game() {
+  const history = useHistory();
   const game = useSelector(selectGame);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
-    // if (!game.isPlaying) return history.push('/');
+    if (game.progress !== GameProgress.PLAYING) return history.push('/');
 
     const phaserGame = new Phaser.Game(config);
 

@@ -3,25 +3,26 @@ import styled from 'styled-components';
 
 interface PopButtonProps {
   text: string;
-  size?: string;
+  size: string;
+  disable: boolean;
   children?: React.ReactNode;
   onClick?: (text: string) => void;
 }
 
-function PopButton({ text, size, children, onClick }: PopButtonProps) {
+function PopButton({ text, size, disable, children, onClick }: PopButtonProps) {
   return (
     <StyledButton
       onClick={onClick && (() => onClick(text))}
-      style={{ fontSize: size }}>
+      size={size}
+      disabled={disable}>
       {children}
       {text}
     </StyledButton>
   );
 }
 
-const StyledButton = styled.button`
-  flex-grow: 1;
-
+const StyledButton = styled.button<{ size: string }>`
+  width: 100%;
   margin: 5px;
   padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.7);
@@ -30,8 +31,9 @@ const StyledButton = styled.button`
   outline: none;
   user-select: none;
 
-  color: #14095c;
+  color: ${({ theme }) => theme.color.darkblue};
   font-family: inherit;
+  font-size: ${({ size }) => size};
 
   transition: all 0.2s;
 
@@ -45,10 +47,19 @@ const StyledButton = styled.button`
     box-shadow: 0 0 0 black;
     transform: translate(0, 0);
   }
+
+  &:disabled {
+    &:hover {
+      box-shadow: none;
+      transform: none;
+      cursor: wait;
+    }
+  }
 `;
 
 PopButton.defaultProps = {
   size: '2.4rem',
+  disable: false,
 };
 
 export default PopButton;

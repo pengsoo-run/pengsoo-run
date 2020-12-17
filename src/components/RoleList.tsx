@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { GameMode, GameRole } from '~/types/game.type';
+import { GameMode, PlayerRole } from '~/types/game.type';
 import { flexCenter } from './styles/mixin';
 
 interface RoleListProps {
@@ -10,68 +10,67 @@ interface RoleListProps {
 }
 
 function RoleList({ mode, size }: RoleListProps) {
-  console.log('✅   RoleList   mode', mode);
+  const playerRoleList =
+    mode === GameMode.P2
+      ? [PlayerRole.L, PlayerRole.R, PlayerRole.J]
+      : [PlayerRole.L, PlayerRole.J, PlayerRole.R];
+
   return (
-    <Layout mode={mode}>
-      <Role role={GameRole.L} size={size}>
-        {GameRole.L}
-      </Role>
-      <Role role={GameRole.J} size={size}>
-        {GameRole.J}
-      </Role>
-      <Role role={GameRole.R} size={size}>
-        {GameRole.R}
-      </Role>
+    <Layout mode={mode} size={size}>
+      {playerRoleList.map(role => (
+        <Role key={role} role={role} size={size}>
+          {role}
+        </Role>
+      ))}
     </Layout>
   );
 }
 
-const Layout = styled.div<{ mode: GameMode }>`
+const Layout = styled.div<{ size: number; mode: GameMode }>`
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 60px;
-  margin-bottom: 20px;
+  height: ${({ size }) => `${size}px`};
+  margin-bottom: 30px;
 
   div {
     &:nth-child(2) {
-      margin-left: ${({ mode }) => {
-        if (mode === GameMode.P1 || mode === GameMode.P2) return '-22px';
-        return '8px';
+      margin-left: ${({ mode, size }) => {
+        if (mode === GameMode.P3) return `${size / 6}px`;
+        return `-${size / 3}px`;
       }};
     }
 
     &:nth-child(3) {
-      margin-left: ${({ mode }) => {
-        if (mode === GameMode.P1) return '-22px';
-        return '8px';
+      margin-left: ${({ mode, size }) => {
+        if (mode === GameMode.P1) return `-${size / 3}px`;
+        return `${size / 6}px`;
       }};
     }
   }
 `;
 
-const Role = styled.div<{ size: number; role: GameRole }>`
+const Role = styled.div<{ size: number; role: PlayerRole }>`
   ${flexCenter}
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
-  border-radius: 50%;
   font-size: ${({ size }) => `${size / 3}px`};
-  color: #fff;
+  color: ${({ theme }) => theme.color.sub};
   opacity: 0.9;
+  border-radius: 50%;
 
-  background: ${({ role }) => {
-    if (role === GameRole.J) return '#df4242';
-    return '#f57936';
+  background: ${({ theme, role }) => {
+    if (role === PlayerRole.J) return theme.color.red;
+    return theme.color.orange;
   }};
   border: 3px solid
-    ${({ role }) => {
-      if (role === GameRole.J) return '#a01b1b';
-      return '#bc4809';
+    ${({ theme, role }) => {
+      if (role === PlayerRole.J) return theme.color.darkred;
+      return theme.color.darkorange;
     }};
   box-shadow: 0px 5px 0px
-    ${({ role }) => {
-      if (role === GameRole.J) return '#a01b1b';
-      return '#bc4809';
+    ${({ theme, role }) => {
+      if (role === PlayerRole.J) return theme.color.darkred;
+      return theme.color.darkorange;
     }};
 `;
 

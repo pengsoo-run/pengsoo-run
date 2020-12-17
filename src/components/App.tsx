@@ -16,7 +16,7 @@ function App() {
     <Wrapper>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <div className='content'>
+        <Content>
           <Switch>
             <Route exact path='/' component={Welcome} />
             <Route path='/lobby' component={Lobby} />
@@ -24,7 +24,7 @@ function App() {
             <Route path='/gamepad/:id' component={GamePad} />
             <Redirect to='/' />
           </Switch>
-        </div>
+        </Content>
       </ThemeProvider>
     </Wrapper>
   );
@@ -34,27 +34,22 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   ${flexCenter}
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+`;
 
-  .content {
-    width: 800px;
-    max-height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #061763;
-    background-image: url('lobby/game-pad.png');
-    background-position: center;
-    background-size: cover;
-    box-shadow: 0 6px 24px 0 rgba(44, 39, 56, 0.4),
-      24px 24px 48px 0 rgba(44, 39, 56, 0.6);
-    border-radius: 15px;
-    padding: 20px 30px;
-    color: white;
-    overflow: hidden;
-  }
+const Content = styled.div`
+  ${flexCenter}
+  width: 800px;
+  max-height: 600px;
+  background-color: ${({ theme }) => theme.color.main};
+  background-image: url('lobby/game-pad.png');
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 6px 24px 0 rgba(44, 39, 56, 0.4),
+    24px 24px 48px 0 rgba(44, 39, 56, 0.6);
+  border-radius: 15px;
+  padding: 20px 30px;
+  color: ${({ theme }) => theme.color.sub};
+  overflow: hidden;
 `;
 
 export default App;
