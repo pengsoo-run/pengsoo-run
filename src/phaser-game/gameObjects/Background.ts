@@ -11,11 +11,11 @@ export class Background {
     this.scene = scene;
 
     this.scene.add
-      .tileSprite(0, 0, Setting.WIDTH, Setting.HEIGHT, 'bg')
+      .tileSprite(-20, -20, Setting.WIDTH + 40, Setting.HEIGHT + 40, 'bg')
       .setOrigin(0)
       .setDepth(0);
 
-    this.scene.add.image(0, 0, 'sky').setOrigin(0).setDepth(1);
+    this.scene.add.image(-20, -20, 'sky').setOrigin(0).setDepth(1);
 
     this.clouds1 = this.scene.add
       .tileSprite(0, 0, Setting.WIDTH, 64, 'clouds1')

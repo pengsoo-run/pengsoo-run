@@ -1,22 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface PopButtonProps {
   text: string;
   size: string;
-  disable: boolean;
+  waiting: boolean;
   children?: React.ReactNode;
   onClick?: (text: string) => void;
 }
 
-function PopButton({ text, size, disable, children, onClick }: PopButtonProps) {
+function PopButton({ text, size, waiting, children, onClick }: PopButtonProps) {
+  const [typingText, setTypingText] = useState<string>('');
+
+  useEffect(() => {
+    if (!waiting) return;
+
+    let num = 0;
+    const sliceText = () => {
+      setTypingText(`${text.slice(0, num)}_`);
+      num = num == text.length ? 0 : ++num;
+    };
+
+    const intervalId = setInterval(sliceText, 300);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <StyledButton
       onClick={onClick && (() => onClick(text))}
       size={size}
-      disabled={disable}>
+      disabled={waiting}>
       {children}
-      {text}
+      {waiting ? typingText : text}
     </StyledButton>
   );
 }
@@ -49,9 +67,14 @@ const StyledButton = styled.button<{ size: string }>`
   }
 
   &:disabled {
+    background-color: ${({ theme }) => theme.color.main};
+    color: white;
+    opacity: 0.8;
+    transform: none;
+
     &:hover {
+      color: white;
       box-shadow: none;
-      transform: none;
       cursor: wait;
     }
   }
@@ -59,7 +82,7 @@ const StyledButton = styled.button<{ size: string }>`
 
 PopButton.defaultProps = {
   size: '2.4rem',
-  disable: false,
+  waiting: false,
 };
 
 export default PopButton;

@@ -13,7 +13,6 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     createPlayer(state, action: PayloadAction<Player>) {
-      console.log('✅   createPlayer   action.payloa', action.payloa);
       return action.payload;
     },
     destroyPlayer(state) {

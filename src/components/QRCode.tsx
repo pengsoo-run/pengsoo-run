@@ -6,7 +6,7 @@ interface QRCodeProps {
 }
 
 function QRCode({ url }: QRCodeProps) {
-  console.log('✅   QRCode   url', url);
+  console.log('✅ QRCode URL', url);
   return (
     <QR
       value={url}

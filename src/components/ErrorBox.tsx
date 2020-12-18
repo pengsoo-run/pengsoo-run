@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   opacity: 0.9;
 
   h1 {
-    font-size: 8vw;
+    font-size: 8vmin;
     margin-bottom: 20px;
     color: ${({ theme }) => theme.color.sub};
   }
