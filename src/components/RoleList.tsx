@@ -1,15 +1,38 @@
-import React from 'react';
+import { GridFactory } from 'matter';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { GameMode, PlayerRole } from '~/types/game.type';
+import { GameMode, Player, PlayerRole } from '~/types/game.type';
 import { flexCenter } from './styles/mixin';
 
 interface RoleListProps {
   mode: GameMode;
   size: number;
+  playerList: Player[];
+  seletion: boolean;
 }
 
-function RoleList({ mode, size }: RoleListProps) {
+function RoleList({ mode, size, playerList, seletion }: RoleListProps) {
+  const [connectedPlayer, setConnectedPlayer] = useState<PlayerRole[]>([]);
+
+  useEffect(() => {
+    const filterd: PlayerRole[] = [];
+
+    for (const player of playerList) {
+      if (!player.id || !player.role) continue;
+
+      if (player.role === PlayerRole.ALL) {
+        filterd.push(PlayerRole.L, PlayerRole.R, PlayerRole.J);
+      } else if (player.role == PlayerRole.LR) {
+        filterd.push(PlayerRole.L, PlayerRole.R);
+      } else {
+        filterd.push(player.role);
+      }
+    }
+
+    setConnectedPlayer(filterd);
+  }, [playerList]);
+
   const playerRoleList =
     mode === GameMode.P2
       ? [PlayerRole.L, PlayerRole.R, PlayerRole.J]
@@ -18,7 +41,11 @@ function RoleList({ mode, size }: RoleListProps) {
   return (
     <Layout mode={mode} size={size}>
       {playerRoleList.map(role => (
-        <Role key={role} role={role} size={size}>
+        <Role
+          key={role}
+          role={role}
+          size={size}
+          isConnected={seletion || connectedPlayer.includes(role)}>
           {role}
         </Role>
       ))}
@@ -49,7 +76,11 @@ const Layout = styled.div<{ size: number; mode: GameMode }>`
   }
 `;
 
-const Role = styled.div<{ size: number; role: PlayerRole }>`
+const Role = styled.div<{
+  size: number;
+  role: PlayerRole;
+  isConnected: boolean;
+}>`
   ${flexCenter}
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
@@ -58,17 +89,20 @@ const Role = styled.div<{ size: number; role: PlayerRole }>`
   opacity: 0.9;
   border-radius: 50%;
 
-  background: ${({ theme, role }) => {
+  background: ${({ theme, role, isConnected }) => {
+    if (!isConnected) return theme.color.gray;
     if (role === PlayerRole.J) return theme.color.red;
     return theme.color.orange;
   }};
   border: 3px solid
-    ${({ theme, role }) => {
+    ${({ theme, role, isConnected }) => {
+      if (!isConnected) return theme.color.darkgray;
       if (role === PlayerRole.J) return theme.color.darkred;
       return theme.color.darkorange;
     }};
   box-shadow: 0px 5px 0px
-    ${({ theme, role }) => {
+    ${({ theme, role, isConnected }) => {
+      if (!isConnected) return theme.color.darkgray;
       if (role === PlayerRole.J) return theme.color.darkred;
       return theme.color.darkorange;
     }};
@@ -76,6 +110,8 @@ const Role = styled.div<{ size: number; role: PlayerRole }>`
 
 RoleList.defaultProps = {
   size: 50,
+  playerList: [],
+  seletion: false,
 };
 
 export default RoleList;

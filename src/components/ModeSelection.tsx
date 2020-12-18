@@ -19,7 +19,7 @@ function ModeSelection({ handleClick }: ModeSelectionProps) {
       <ModeList>
         {gameModeList.map(gameMode => (
           <PopButton key={gameMode} text={gameMode} onClick={handleClick}>
-            <RoleList mode={gameMode} />
+            <RoleList mode={gameMode} seletion />
           </PopButton>
         ))}
       </ModeList>

@@ -10,6 +10,8 @@ const theme: DefaultTheme = {
     darkorange: '#bc4809',
     darkblue: '#14095c',
     yellow: '#d69f20',
+    gray: '#979797',
+    darkgray: '#444444',
   },
 };
 

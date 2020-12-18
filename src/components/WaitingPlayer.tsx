@@ -35,11 +35,11 @@ function WaitingPlayer({ gameId, playerList, mode }: WaitingPlayerProps) {
       <Wrapper>
         <QRCode url={`https://${window.location.host}/gamepad/${gameId}`} />
         <div className='players'>
-          <RoleList size={110} mode={mode} />
+          <RoleList size={110} mode={mode} playerList={playerList} />
           {isReady ? (
-            <PopButton text='GAME START' onClick={moveToGamePath} />
+            <PopButton text='🐧GAME START🐧' onClick={moveToGamePath} />
           ) : (
-            <PopButton text='Waiting...' disable />
+            <PopButton text='Waiting...' size='1.8rem' waiting />
           )}
         </div>
       </Wrapper>
