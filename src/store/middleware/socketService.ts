@@ -34,7 +34,7 @@ export default class SocketService {
     this.listen('updateGameProgress', updateGameProgress);
     this.listen('destroyGame', resetGame);
 
-    this.listen('error', onError);
+    this.listen('message', onError);
   }
 
   public interceptAction(action: AnyAction): boolean {

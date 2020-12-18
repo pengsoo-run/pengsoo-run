@@ -59,6 +59,8 @@ export class PreloadScene extends Phaser.Scene {
 
     this.load.image('hole01', 'obstacle/hole01.png');
     this.load.image('hole02', 'obstacle/hole02.png');
+    this.load.image('hole03', 'obstacle/hole03.png');
+    this.load.image('polar_bear', 'obstacle/polar_bear.png');
 
     for (let i = 0; i < 200; i++) {
       this.load.image('logo' + i, 'obstacle/polar_bear.png');

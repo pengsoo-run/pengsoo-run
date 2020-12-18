@@ -32,6 +32,7 @@ export const gameSlice = createSlice({
     },
     onError(state, action: PayloadAction<string>) {
       state.error = action.payload;
+      console.log('✅   onError   action.payload', action.payload);
     },
   },
 });

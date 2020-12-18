@@ -31,15 +31,18 @@ export class Obstacle extends Phaser.GameObjects.Container {
     this.setScale(0);
 
     const body = this.body as Phaser.Physics.Arcade.Body;
-    body.setSize(this.image.width * 0.8, this.image.height * 0.4);
+    body.setSize(
+      this.image.width * (key === 'polar_bear' ? 0.6 : 0.8),
+      this.image.height * (key === 'polar_bear' ? 0.7 : 0.4),
+    );
 
     if (this.side === 'right') {
       this.image.setFlipX(true);
       this.image.setOrigin(0, 0.5);
-      body.setOffset(40, -10);
+      body.setOffset(40, key === 'polar_bear' ? -50 : -10);
     } else {
       this.image.setOrigin(1, 0.5);
-      body.setOffset(-this.image.width + 30, -10);
+      body.setOffset(-this.image.width + 30, key === 'polar_bear' ? -50 : -10);
     }
 
     this.scene.physics.world.enable(this);
