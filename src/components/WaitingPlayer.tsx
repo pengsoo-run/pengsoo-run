@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GameMode, Player } from '~/types/game.type';
@@ -13,10 +12,10 @@ interface WaitingPlayerProps {
   gameId: string;
   playerList: Player[];
   mode: GameMode;
+  startGame: () => void;
 }
 
-function WaitingPlayer({ gameId, playerList, mode }: WaitingPlayerProps) {
-  const history = useHistory();
+function WaitingPlayer({ gameId, playerList, mode, startGame }: WaitingPlayerProps) {
   const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,8 +26,6 @@ function WaitingPlayer({ gameId, playerList, mode }: WaitingPlayerProps) {
     setIsReady(true);
   }, [playerList]);
 
-  const moveToGamePath = () => history.push('/game');
-
   return (
     <>
       <h1>Waiting for Player</h1>
@@ -37,7 +34,7 @@ function WaitingPlayer({ gameId, playerList, mode }: WaitingPlayerProps) {
         <div className='players'>
           <RoleList size={110} mode={mode} playerList={playerList} />
           {isReady ? (
-            <PopButton text='🐧GAME START🐧' onClick={moveToGamePath} />
+            <PopButton text='🐧GAME START🐧' onClick={startGame} />
           ) : (
             <PopButton text='Waiting...' size='1.8rem' waiting />
           )}

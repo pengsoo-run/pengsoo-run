@@ -67,7 +67,7 @@ const StyledButton = styled.button<{ size: string }>`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.color.gray};
+    background-color: ${({ theme }) => theme.color.main};
     color: white;
     opacity: 0.8;
     transform: none;

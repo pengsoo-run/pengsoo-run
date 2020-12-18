@@ -42,6 +42,7 @@ function GamePadButton({ role }: GamePadButtonProps) {
     <Layout className={role}>
       {roleList.map(role => (
         <StyledButton
+          key={role}
           className={role}
           onMouseDown={onPressDown}
           onTouchStart={onPressDown}
