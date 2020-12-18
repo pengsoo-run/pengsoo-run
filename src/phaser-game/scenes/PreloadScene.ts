@@ -11,14 +11,14 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.cameras.main.setBackgroundColor(0x98d687);
+    this.cameras.main.setBackgroundColor(0x80c2f3);
     this.createLoadingbar();
 
     this.load.on(
       'progress',
       (value: number) => {
         this.progressBar.clear();
-        this.progressBar.fillStyle(0xfff6d3, 1);
+        this.progressBar.fillStyle(0xe6f4ff, 1);
         this.progressBar.fillRect(
           Setting.WIDTH / 4,
           Setting.HEIGHT / 2 - 16,
@@ -61,18 +61,14 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('hole02', 'obstacle/hole02.png');
     this.load.image('hole03', 'obstacle/hole03.png');
     this.load.image('polar_bear', 'obstacle/polar_bear.png');
-
-    for (let i = 0; i < 200; i++) {
-      this.load.image('logo' + i, 'obstacle/polar_bear.png');
-    }
   }
 
   create() {
     this.anims.create({
       key: 'pengsoo-run',
       frames: this.anims.generateFrameNames('pengsoo_run', {
-        start: 0,
-        end: 3,
+        start: 1,
+        end: 4,
         prefix: 'pengsoo_run',
         zeroPad: 2,
         suffix: '.png',
@@ -84,8 +80,8 @@ export class PreloadScene extends Phaser.Scene {
     this.anims.create({
       key: 'pengsoo-jump',
       frames: this.anims.generateFrameNames('pengsoo_jump', {
-        start: 0,
-        end: 5,
+        start: 1,
+        end: 6,
         prefix: 'pengsoo_jump',
         zeroPad: 2,
         suffix: '.png',
@@ -101,7 +97,7 @@ export class PreloadScene extends Phaser.Scene {
 
   private createLoadingbar(): void {
     this.loadingBar = this.add.graphics();
-    this.loadingBar.fillStyle(0x5dae47, 1);
+    this.loadingBar.fillStyle(0x18649a, 1);
     this.loadingBar.fillRect(
       Setting.WIDTH / 4 - 2,
       Setting.HEIGHT / 2 - 18,

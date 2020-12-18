@@ -29,9 +29,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
 
-    this.shadow = scene.add
-      .ellipse(0, 10, 80, 25, 0x00000, 0.2)
-      .setOrigin(0.5, 1);
+    this.shadow = scene.add.ellipse(0, 10, 80, 25, 0x00000, 0.2).setOrigin(0.5, 1);
 
     this.running = scene.add
       .sprite(0, 0, 'pengsoo_run')
@@ -100,7 +98,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
       this.hurtTimer -= 1;
       const hurtRate = this.hurtTimer / 30;
 
-      this.text.setY(200 * hurtRate);
+      this.text.setY(-50 - 50 * hurtRate);
 
       if (this.hurtTimer < 0) {
         this.text.setVisible(false);
@@ -119,13 +117,12 @@ export class Pengsoo extends Phaser.GameObjects.Container {
 
   public gotHurt() {
     if (this.currentState !== PengsooState.JUMPING) {
-      console.log('다쳐땅');
-      this.scene.cameras.main.shake(500, 0.02, true);
+      this.scene.cameras.main.shake(600, 0.03, true);
       this.hurtTimer = 30;
       this.currentState = PengsooState.HURT;
       this.emit('collision');
 
-      this.text.setY(0);
+      this.text.setY(-50);
       this.text.setVisible(true);
     }
   }
