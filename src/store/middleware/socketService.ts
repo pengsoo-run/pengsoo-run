@@ -17,7 +17,7 @@ export default class SocketService {
   constructor(private url: string) {}
 
   public init(): SocketService {
-    this.socket = io(this.url);
+    this.socket = io(this.url, { transports: ['websocket'] });
 
     this.socket.on('connect', () => console.log('socket connected'));
 
