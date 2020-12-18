@@ -50,7 +50,7 @@ const Layout = styled.div`
 const GameUI = styled.div`
   position: absolute;
   top: 20px;
-  right: 15px;
+  right: 320px;
   z-index: 2;
 `;
 

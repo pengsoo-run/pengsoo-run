@@ -2,8 +2,9 @@ import { Middleware, MiddlewareAPI, Dispatch, Action } from 'redux';
 
 import SocketService from './socketService';
 
-const serverUrl = process.env.SERVER_URL as string;
-export const serviceInstance = new SocketService(serverUrl);
+export const serviceInstance = new SocketService(
+  'https://pengsoo-run-dev.ap-northeast-2.elasticbeanstalk.com:444',
+);
 
 export function createSocketMiddleware(): Middleware {
   return ({ dispatch }: MiddlewareAPI) => {

@@ -3,10 +3,10 @@ import { serviceInstance } from '~/store/middleware';
 
 import Setting from '../consts/Setting';
 
-enum PengsooState {
-  Running,
-  Jumping,
-  hurt,
+export const enum PengsooState {
+  RUNNING = 'Running',
+  JUMPING = 'Jumping',
+  HURT = 'hurt',
 }
 
 type Button = 'left' | 'right' | 'jump';
@@ -24,8 +24,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
   private hurtTimer: number = 0;
   private text!: Phaser.GameObjects.BitmapText;
   private isPressed: isPressed;
-
-  private currentState = PengsooState.Running;
+  public currentState = PengsooState.RUNNING;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y);
@@ -73,15 +72,15 @@ export class Pengsoo extends Phaser.GameObjects.Container {
   private preUpdate(): void {
     const body = this.body as Phaser.Physics.Arcade.Body;
 
-    if (this.currentState === PengsooState.Running) {
+    if (this.currentState === PengsooState.RUNNING) {
       if (this.isPressed.jump) {
-        this.currentState = PengsooState.Jumping;
+        this.currentState = PengsooState.JUMPING;
         this.jumpTimer = 50;
         this.running.play('pengsoo-jump');
       }
     }
 
-    if (this.currentState === PengsooState.Jumping) {
+    if (this.currentState === PengsooState.JUMPING) {
       this.jumpTimer -= 1;
       const jumpRate = this.jumpTimer / 50;
 
@@ -92,12 +91,12 @@ export class Pengsoo extends Phaser.GameObjects.Container {
       }
 
       if (this.jumpTimer < 0) {
-        this.currentState = PengsooState.Running;
+        this.currentState = PengsooState.RUNNING;
         this.running.play('pengsoo-run');
       }
     }
 
-    if (this.currentState === PengsooState.hurt) {
+    if (this.currentState === PengsooState.HURT) {
       this.hurtTimer -= 1;
       const hurtRate = this.hurtTimer / 30;
 
@@ -105,7 +104,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
 
       if (this.hurtTimer < 0) {
         this.text.setVisible(false);
-        this.currentState = PengsooState.Running;
+        this.currentState = PengsooState.RUNNING;
       }
     }
 
@@ -119,10 +118,12 @@ export class Pengsoo extends Phaser.GameObjects.Container {
   }
 
   public gotHurt() {
-    if (this.currentState !== PengsooState.Jumping) {
+    if (this.currentState !== PengsooState.JUMPING) {
       console.log('다쳐땅');
+      this.scene.cameras.main.shake(500, 0.02, true);
       this.hurtTimer = 30;
-      this.currentState = PengsooState.hurt;
+      this.currentState = PengsooState.HURT;
+      this.emit('collision');
 
       this.text.setY(0);
       this.text.setVisible(true);
