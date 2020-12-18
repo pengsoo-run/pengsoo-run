@@ -2,7 +2,7 @@ import { Middleware, MiddlewareAPI, Dispatch, Action } from 'redux';
 
 import SocketService from './socketService';
 
-export const serviceInstance = new SocketService('');
+export const serviceInstance = new SocketService(process.env.SERVER_URL);
 
 export function createSocketMiddleware(): Middleware {
   return ({ dispatch }: MiddlewareAPI) => {
