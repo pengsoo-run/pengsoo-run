@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { createGame, resetGame, selectGame, startGame } from '~/store/gameSlice';
-import { GameProgress } from '~/types/game.type';
+import { GameProgress } from '../types/game.type';
+import { createGame, resetGame, selectGame, startGame } from '../store/gameSlice';
 
 import ModeSelection from './ModeSelection';
 import WaitingPlayer from './WaitingPlayer';
+import ErrorBox from './ErrorBox';
 
 function Lobby() {
   const game = useSelector(selectGame);
@@ -29,14 +30,17 @@ function Lobby() {
     dispatch(createGame(selectedMode));
   };
 
+  const initGmae = () => dispatch(startGame(game.id));
+
   return (
     <Layout>
+      {game.error && <ErrorBox message={game.error} />}
       {game.mode ? (
         <WaitingPlayer
           gameId={game.id}
           mode={game.mode}
           playerList={game.playerList}
-          startGame={() => dispatch(startGame(game.id))}
+          initGmae={initGmae}
         />
       ) : (
         <ModeSelection handleClick={selectMode} />

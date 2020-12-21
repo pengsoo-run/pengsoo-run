@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { GameProgress } from '~/types/game.type';
+import { GameProgress } from '../types/game.type';
 import { selectGame } from '../store/gameSlice';
 import { config } from '../phaser-game/config';
 
@@ -32,11 +32,8 @@ function Game() {
       <div id='game-container' />
       <GameUI>
         <Link to='/'>
-          <PopButton size='20px' text='Finish Game' />
+          <PopButton size='20px' text='FINISH GAME' />
         </Link>
-        {game.playerList.map(player => (
-          <div key={player.id}></div>
-        ))}
       </GameUI>
     </Layout>
   );

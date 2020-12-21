@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { buttonDown, buttonUp } from '~/store/playerSlice';
 import { PlayerRole } from '../types/game.type';
+import { buttonDown, buttonUp } from '../store/playerSlice';
 
 interface GamePadButtonProps {
   role: PlayerRole;
@@ -15,6 +15,25 @@ type pressEvent =
 
 function GamePadButton({ role }: GamePadButtonProps) {
   const dispatch = useDispatch();
+  const [roleList, setRoleList] = useState<PlayerRole[]>([]);
+
+  useEffect(() => {
+    const roleList: PlayerRole[] = [];
+
+    switch (role) {
+      case PlayerRole.ALL:
+        roleList.push(PlayerRole.L, PlayerRole.R, PlayerRole.J);
+        break;
+      case PlayerRole.LR:
+        roleList.push(PlayerRole.L, PlayerRole.R);
+        break;
+      default:
+        roleList.push(role);
+        break;
+    }
+
+    setRoleList(roleList);
+  }, [role]);
 
   const onPressDown = (ev: pressEvent): void => {
     dispatch(buttonDown(ev.currentTarget.textContent));
@@ -23,20 +42,6 @@ function GamePadButton({ role }: GamePadButtonProps) {
   const onPressUp = (ev: pressEvent): void => {
     dispatch(buttonUp(ev.currentTarget.textContent));
   };
-
-  let roleList = [];
-
-  switch (role) {
-    case PlayerRole.ALL:
-      roleList = [PlayerRole.L, PlayerRole.R, PlayerRole.J];
-      break;
-    case PlayerRole.LR:
-      roleList = [PlayerRole.L, PlayerRole.R];
-      break;
-    default:
-      roleList = [role];
-      break;
-  }
 
   return (
     <Layout className={role}>

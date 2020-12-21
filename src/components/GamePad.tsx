@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { joinGame, leaveGame, selectPlayer } from '~/store/playerSlice';
-import { selectError, selectGameProgress } from '~/store/gameSlice';
+import { joinGame, leaveGame, selectPlayer } from '../store/playerSlice';
+import { selectError, selectGameProgress } from '../store/gameSlice';
 
 import GamePadButton from './GamePadButton';
 import ErrorBox from './ErrorBox';
@@ -16,7 +16,7 @@ interface MatchParams {
 function GamePad({ match }: RouteComponentProps<MatchParams>) {
   const { id } = match.params;
   const player = useSelector(selectPlayer);
-  // const gameProgress = useSelector(selectGameProgress);
+  const gameProgress = useSelector(selectGameProgress);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ function GamePad({ match }: RouteComponentProps<MatchParams>) {
 
   return (
     <Wrapper>
-      {/* <Info>[ {gameProgress} ]</Info> */}
+      <Info>[ {gameProgress} ]</Info>
       {player.role && <GamePadButton role={player.role} />}
       {error && <ErrorBox message={error} />}
     </Wrapper>
