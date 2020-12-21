@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
-
 import { ActionCreator, AnyAction, Dispatch } from 'redux';
+
 import {
   initGame,
   onError,
@@ -9,6 +9,7 @@ import {
   updatePlayerList,
 } from '../gameSlice';
 import { createPlayer, destroyPlayer } from '../playerSlice';
+import { EVENT } from '~/constants/Event';
 
 export default class SocketService {
   public socket: SocketIOClient.Socket = {} as SocketIOClient.Socket;
@@ -27,14 +28,14 @@ export default class SocketService {
   public subscribe(dispatch: Dispatch): void {
     this.dispatch = dispatch;
 
-    this.listen('createGame', initGame);
-    this.listen('joinGame', createPlayer);
-    this.listen('leaveGame', destroyPlayer);
-    this.listen('updatePlayerList', updatePlayerList);
-    this.listen('updateGameProgress', updateGameProgress);
-    this.listen('destroyGame', resetGame);
+    this.listen(EVENT.CREATE_GAME, initGame);
+    this.listen(EVENT.JOIN_GAME, createPlayer);
+    this.listen(EVENT.LEAVE_GAME, destroyPlayer);
+    this.listen(EVENT.UPDATE_PLAYERLIST, updatePlayerList);
+    this.listen(EVENT.UPDATE_GAME_PROGRESS, updateGameProgress);
+    this.listen(EVENT.DESTROY_GAME, resetGame);
 
-    this.listen('message', onError);
+    this.listen(EVENT.MESSAGE, onError);
   }
 
   public interceptAction(action: AnyAction): boolean {
@@ -45,7 +46,7 @@ export default class SocketService {
       return true;
     }
 
-    if (name === 'resetGame') {
+    if (name === EVENT.RESET_GAME) {
       this.removeGameListener();
     }
 
@@ -64,7 +65,7 @@ export default class SocketService {
   }
 
   private removeGameListener(): void {
-    this.socket.off('buttonDown');
-    this.socket.off('buttonUp');
+    this.socket.off(EVENT.BUTTON_DOWN);
+    this.socket.off(EVENT.BUTTON_UP);
   }
 }

@@ -7,7 +7,6 @@ export const enum GameMode {
 export const enum GameProgress {
   WAITING = 'waiting',
   PLAYING = 'playing',
-  PAUSE = 'pause',
   GAMEOVER = 'gameover',
 }
 
@@ -26,6 +25,7 @@ export interface Player {
 
 export interface Game {
   id: string;
+  hostId: string;
   mode: GameMode | null;
   progress: GameProgress;
   playerList: Player[];

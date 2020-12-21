@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import Setting from './consts/Setting';
+import { SETTING } from '~/constants/GameSetting';
 
 import { PreloadScene } from './scenes/PreloadScene';
 import { MainScene } from './scenes/MainScene';
@@ -8,12 +8,9 @@ import { MainScene } from './scenes/MainScene';
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Pengsoo Run',
   type: Phaser.AUTO,
-  width: Setting.WIDTH,
-  height: Setting.HEIGHT,
+  width: SETTING.WIDTH,
+  height: SETTING.HEIGHT,
   parent: 'game-container',
-  physics: {
-    default: 'arcade',
-    // arcade: { debug: true },
-  },
+  physics: { default: 'arcade' },
   scene: [PreloadScene, MainScene],
 };
