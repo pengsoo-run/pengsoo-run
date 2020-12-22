@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PlayerRole } from '../types/game.type';
-import { buttonDown, buttonUp } from '../store/playerSlice';
+import { PlayerRole } from '~/types/game.type';
+import { buttonDown, buttonUp } from '~/store/playerSlice';
 
 interface GamePadButtonProps {
   role: PlayerRole;

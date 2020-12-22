@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { joinGame, leaveGame, selectPlayer } from '../store/playerSlice';
-import { selectError, selectGameProgress } from '../store/gameSlice';
+import { joinGame, leaveGame, selectPlayer } from '~/store/playerSlice';
+import { selectError, selectGameProgress } from '~/store/gameSlice';
 
 import GamePadButton from './GamePadButton';
 import ErrorBox from './ErrorBox';

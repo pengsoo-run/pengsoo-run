@@ -3,9 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { GameProgress } from '../types/game.type';
-import { selectGame } from '../store/gameSlice';
-import { config } from '../phaser-game/config';
+import { GameProgress } from '~/types/game.type';
+import { selectGame } from '~/store/gameSlice';
+import { config } from '~/phaser-game/config';
 
 import PopButton from './PopButton';
 import ErrorBox from './ErrorBox';

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { GameMode, Player } from '../types/game.type';
+import { GameMode, Player } from '~/types/game.type';
+
 import { flexCenter } from './styles/mixin';
 
 import QRCode from './QRCode';

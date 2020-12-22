@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { GameMode } from '../types/game.type';
+import { GameMode } from '~/types/game.type';
 
 import PopButton from './PopButton';
 import RoleList from './RoleList';

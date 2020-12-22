@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GameProgress } from '../types/game.type';
-import { createGame, resetGame, selectGame, startGame } from '../store/gameSlice';
+import { GameProgress } from '~/types/game.type';
+import { createGame, resetGame, selectGame, startGame } from '~/store/gameSlice';
 
 import ModeSelection from './ModeSelection';
 import WaitingPlayer from './WaitingPlayer';

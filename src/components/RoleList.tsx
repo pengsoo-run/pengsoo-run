@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { GameMode, Player, PlayerRole } from '~/types/game.type';
+
 import { flexCenter } from './styles/mixin';
 
 interface RoleListProps {
