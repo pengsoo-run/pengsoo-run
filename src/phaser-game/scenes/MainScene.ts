@@ -1,11 +1,12 @@
 import Phaser from 'phaser';
 
-import Setting from '../consts/Setting';
+import { SETTING, TEXTURE } from '~/constants/GameSetting';
+import { EVENT } from '~/constants/Event';
+import { serviceInstance } from '~/store/middleware';
 
 import { Background } from '../gameObjects/Background';
 import { Pengsoo } from '../gameObjects/Pengsoo';
 import { Obstacle } from '../gameObjects/Obstacle';
-import { serviceInstance } from '~/store/middleware';
 
 export class MainScene extends Phaser.Scene {
   private background!: Background;
@@ -18,7 +19,7 @@ export class MainScene extends Phaser.Scene {
   private brackTime: number = 1;
 
   constructor() {
-    super('game');
+    super('main');
   }
 
   public init(): void {
@@ -30,14 +31,14 @@ export class MainScene extends Phaser.Scene {
     this.background = new Background(this);
 
     this.lifeText = this.add
-      .bitmapText(30, 30, 'font', `LIFE ${this.registry.values.life}`)
+      .bitmapText(30, 30, TEXTURE.FONT, `LIFE ${this.registry.values.life}`)
       .setDepth(5);
 
     this.scoreText = this.add
-      .bitmapText(580, 30, 'font', `SCORE ${this.registry.values.score}`)
+      .bitmapText(580, 30, TEXTURE.FONT, `SCORE ${this.registry.values.score}`)
       .setDepth(5);
 
-    this.pengsoo = new Pengsoo(this, Setting.WIDTH * 0.3, Setting.HEIGHT * 0.9);
+    this.pengsoo = new Pengsoo(this, SETTING.WIDTH * 0.3, SETTING.HEIGHT * 0.9);
     this.add.existing(this.pengsoo);
     this.pengsoo.setDepth(3);
 
@@ -58,8 +59,6 @@ export class MainScene extends Phaser.Scene {
         this.lifeText.setText(`LIFE ${this.registry.values.life}`);
       }
     });
-
-    this.physics.add.overlap(this.pengsoo, this.obstacles);
   }
 
   private addObstacle(): void {
@@ -68,79 +67,62 @@ export class MainScene extends Phaser.Scene {
       return;
     }
 
-    if (this.registry.values.score === 10) {
-      this.currentLevel = 2;
+    if (
+      this.registry.values.score === 10 ||
+      this.registry.values.score === 20 ||
+      this.registry.values.score === 40
+    ) {
+      this.currentLevel += 1;
       this.obstacleTimer.destroy();
       this.brackTime = 3;
-      this.obstacleTimer = this.time.addEvent({
-        delay: 2000 / this.currentLevel,
-        callback: this.addObstacle,
-        callbackScope: this,
-        loop: true,
-      });
-      this.registry.values.score += 1;
-      return;
-    } else if (this.registry.values.score === 20) {
-      this.currentLevel = 3;
-      this.obstacleTimer.destroy();
-      this.brackTime = 3;
-      this.obstacleTimer = this.time.addEvent({
-        delay: 2000 / this.currentLevel,
-        callback: this.addObstacle,
-        callbackScope: this,
-        loop: true,
-      });
-      this.registry.values.score += 1;
-      return;
-    } else if (this.registry.values.score === 40) {
-      this.currentLevel = 4;
-      this.obstacleTimer.destroy();
-      this.brackTime = 3;
-      this.obstacleTimer = this.time.addEvent({
-        delay: 2000 / this.currentLevel,
-        callback: this.addObstacle,
-        callbackScope: this,
-        loop: true,
-      });
+      this.obstacleTimer = this.time.addEvent(this.setObstacleConfig(this.currentLevel));
       this.registry.values.score += 1;
       return;
     }
 
-    const obstacles = ['hole01', 'hole02', 'hole03', 'polar_bear'];
+    const obstacles = [
+      TEXTURE.HOLE_1,
+      TEXTURE.HOLE_2,
+      TEXTURE.HOLE_3,
+      TEXTURE.POLAR_BEAR,
+    ];
     this.registry.values.score += 1;
     this.scoreText.setText(`SCORE ${this.registry.values.score}`);
     this.obstacles.add(
       new Obstacle(
         this,
-        Phaser.Math.Between(360, Setting.WIDTH - 360),
+        Phaser.Math.Between(360, SETTING.WIDTH - 360),
         150,
         obstacles[Phaser.Math.Between(0, 3)],
         this.currentLevel,
       ),
     );
+
     this.physics.world.enable(this.obstacles);
+  }
+
+  private setObstacleConfig(level: number): Phaser.Types.Time.TimerEventConfig {
+    return {
+      delay: 2000 / level,
+      callback: this.addObstacle,
+      callbackScope: this,
+      loop: true,
+    };
   }
 
   public update(time: number, delta: number): void {
     this.background.update();
 
-    const body = this.pengsoo.body as Phaser.Physics.Arcade.Body;
-
-    if (body.embedded) body.touching.none = false;
-
-    const touching = !body.touching.none;
-    const wasTouching = !body.wasTouching.none;
-
-    if (touching && !wasTouching) {
+    this.physics.overlap(this.pengsoo, this.obstacles, () => {
       this.pengsoo.gotHurt();
-    }
+    });
 
     if (this.registry.values.life === 0) {
       this.time.addEvent({
         delay: 600,
         callback: () => {
           this.scene.pause();
-          serviceInstance.socket.emit('gameOver');
+          serviceInstance.socket.emit(EVENT.GAMEOVER);
         },
         callbackScope: this,
       });

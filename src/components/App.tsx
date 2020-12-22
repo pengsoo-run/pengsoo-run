@@ -38,14 +38,13 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   ${flexCenter}
-  width: 800px;
-  max-height: 600px;
+  width: ${({ theme }) => theme.size.width};
+  max-height: ${({ theme }) => theme.size.height};
   background-color: ${({ theme }) => theme.color.main};
   background-image: url('lobby/game-pad.png');
   background-position: center;
   background-size: cover;
-  box-shadow: 0 6px 24px 0 rgba(44, 39, 56, 0.4),
-    24px 24px 48px 0 rgba(44, 39, 56, 0.6);
+  box-shadow: 0 6px 24px 0 rgba(44, 39, 56, 0.4), 24px 24px 48px 0 rgba(44, 39, 56, 0.6);
   border-radius: 15px;
   padding: 20px 30px;
   color: ${({ theme }) => theme.color.sub};

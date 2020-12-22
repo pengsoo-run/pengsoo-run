@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import Setting from '../consts/Setting';
+import { SETTING, TEXTURE } from '~/constants/GameSetting';
 
 type Side = 'left' | 'right';
 
@@ -10,13 +10,7 @@ export class Obstacle extends Phaser.GameObjects.Container {
   private side: Side;
   private distanceFromCenter: number;
 
-  constructor(
-    scene: Phaser.Scene,
-    x: number,
-    y: number,
-    key: string,
-    speed: number,
-  ) {
+  constructor(scene: Phaser.Scene, x: number, y: number, key: string, speed: number) {
     super(scene, x, y);
 
     this.image = this.scene.add.image(0, 0, key).setDepth(-1);
@@ -32,17 +26,17 @@ export class Obstacle extends Phaser.GameObjects.Container {
 
     const body = this.body as Phaser.Physics.Arcade.Body;
     body.setSize(
-      this.image.width * (key === 'polar_bear' ? 0.6 : 0.8),
-      this.image.height * (key === 'polar_bear' ? 0.7 : 0.4),
+      this.image.width * (key === TEXTURE.POLAR_BEAR ? 0.6 : 0.8),
+      this.image.height * (key === TEXTURE.POLAR_BEAR ? 0.7 : 0.4),
     );
 
     if (this.side === 'right') {
       this.image.setFlipX(true);
       this.image.setOrigin(0, 0.5);
-      body.setOffset(40, key === 'polar_bear' ? -50 : -10);
+      body.setOffset(40, key === TEXTURE.POLAR_BEAR ? -50 : -10);
     } else {
       this.image.setOrigin(1, 0.5);
-      body.setOffset(-this.image.width + 30, key === 'polar_bear' ? -50 : -10);
+      body.setOffset(-this.image.width + 30, key === TEXTURE.POLAR_BEAR ? -50 : -10);
     }
 
     this.scene.physics.world.enable(this);
@@ -59,7 +53,7 @@ export class Obstacle extends Phaser.GameObjects.Container {
 
     this.setScale(1 * rateY);
 
-    if (this.y > Setting.HEIGHT + 120) {
+    if (this.y > SETTING.HEIGHT + 120) {
       this.destroy();
     }
   }

@@ -2,28 +2,25 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { GameMode, Player } from '~/types/game.type';
+
 import { flexCenter } from './styles/mixin';
 
 import QRCode from './QRCode';
-import PopButton from './PopButton';
 import RoleList from './RoleList';
+import PopButton from './PopButton';
 
 interface WaitingPlayerProps {
   gameId: string;
   playerList: Player[];
   mode: GameMode;
-  startGame: () => void;
+  initGame: () => void;
 }
 
-function WaitingPlayer({ gameId, playerList, mode, startGame }: WaitingPlayerProps) {
+function WaitingPlayer({ gameId, playerList, mode, initGame }: WaitingPlayerProps) {
   const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    for (const player of playerList) {
-      if (!player.id) return setIsReady(false);
-    }
-
-    setIsReady(true);
+    setIsReady(playerList.every(player => !!player.id));
   }, [playerList]);
 
   return (
@@ -34,9 +31,9 @@ function WaitingPlayer({ gameId, playerList, mode, startGame }: WaitingPlayerPro
         <div className='players'>
           <RoleList size={110} mode={mode} playerList={playerList} />
           {isReady ? (
-            <PopButton text='🐧GAME START🐧' onClick={startGame} />
+            <PopButton text='🐧GAME START🐧' onClick={initGame} />
           ) : (
-            <PopButton text='Waiting...' size='1.8rem' waiting />
+            <PopButton text='WAITING...' size='1.8rem' waiting />
           )}
         </div>
       </Wrapper>

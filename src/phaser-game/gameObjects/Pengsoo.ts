@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
-import { serviceInstance } from '~/store/middleware';
 
-import Setting from '../consts/Setting';
+import { serviceInstance } from '~/store/middleware';
+import { ANIMAITON, SETTING, TEXTURE } from '~/constants/GameSetting';
+import { EVENT } from '~/constants/Event';
 
 export const enum PengsooState {
   RUNNING = 'Running',
@@ -32,14 +33,14 @@ export class Pengsoo extends Phaser.GameObjects.Container {
     this.shadow = scene.add.ellipse(0, 10, 80, 25, 0x00000, 0.2).setOrigin(0.5, 1);
 
     this.running = scene.add
-      .sprite(0, 0, 'pengsoo_run')
+      .sprite(0, 0, TEXTURE.PENGSOO_RUN)
       .setOrigin(0.5, 1)
-      .play('pengsoo-run');
+      .play(ANIMAITON.PENGSOO_RUNNING);
 
     this.add(this.shadow);
     this.add(this.running);
 
-    this.text = this.scene.add.bitmapText(0, 0, 'font', '-1');
+    this.text = this.scene.add.bitmapText(0, 0, TEXTURE.FONT, '-1');
 
     this.text.setVisible(false);
     this.add(this.text);
@@ -50,7 +51,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
     body.setSize(this.running.width * 0.5, this.running.height * 0.2);
     body.setOffset(this.running.width * -0.28, -this.running.height * 0.15);
     body.setCollideWorldBounds(true);
-    scene.physics.world.setBounds(0, 180, Setting.WIDTH, Setting.HEIGHT - 200);
+    scene.physics.world.setBounds(0, 180, SETTING.WIDTH, SETTING.HEIGHT - 200);
 
     this.isPressed = {
       left: false,
@@ -58,11 +59,11 @@ export class Pengsoo extends Phaser.GameObjects.Container {
       jump: false,
     };
 
-    serviceInstance.socket.on('buttonDown', (button: Button) => {
+    serviceInstance.socket.on(EVENT.BUTTON_DOWN, (button: Button) => {
       this.isPressed[button] = true;
     });
 
-    serviceInstance.socket.on('buttonUp', (button: Button) => {
+    serviceInstance.socket.on(EVENT.BUTTON_UP, (button: Button) => {
       this.isPressed[button] = false;
     });
   }
@@ -74,7 +75,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
       if (this.isPressed.jump) {
         this.currentState = PengsooState.JUMPING;
         this.jumpTimer = 50;
-        this.running.play('pengsoo-jump');
+        this.running.play(ANIMAITON.PENGSOO_JUMPING);
       }
     }
 
@@ -90,7 +91,7 @@ export class Pengsoo extends Phaser.GameObjects.Container {
 
       if (this.jumpTimer < 0) {
         this.currentState = PengsooState.RUNNING;
-        this.running.play('pengsoo-run');
+        this.running.play(ANIMAITON.PENGSOO_RUNNING);
       }
     }
 
@@ -116,14 +117,14 @@ export class Pengsoo extends Phaser.GameObjects.Container {
   }
 
   public gotHurt() {
-    if (this.currentState !== PengsooState.JUMPING) {
-      this.scene.cameras.main.shake(600, 0.03, true);
-      this.hurtTimer = 30;
-      this.currentState = PengsooState.HURT;
-      this.emit('collision');
+    if (this.currentState !== PengsooState.RUNNING) return;
 
-      this.text.setY(-50);
-      this.text.setVisible(true);
-    }
+    this.scene.cameras.main.shake(600, 0.03, true);
+    this.hurtTimer = 30;
+    this.currentState = PengsooState.HURT;
+    this.emit('collision');
+
+    this.text.setY(-50);
+    this.text.setVisible(true);
   }
 }

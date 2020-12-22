@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { flexCenter } from './styles/mixin';
+
 import PopButton from './PopButton';
 
 interface ErrorBoxProps {
@@ -21,13 +22,13 @@ function ErrorBox({ message }: ErrorBoxProps) {
 }
 
 const Wrapper = styled.div`
+  ${flexCenter}
   position: absolute;
   top: 0;
   left: 0;
   z-index: 99;
   width: 100%;
   height: 100%;
-  ${flexCenter}
   flex-direction: column;
   background-color: ${({ theme }) => theme.color.yellow};
   opacity: 0.9;

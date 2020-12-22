@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import Setting from '../consts/Setting';
+import { ANIMAITON, SETTING, TEXTURE } from '~/constants/GameSetting';
 
 export class PreloadScene extends Phaser.Scene {
   private loadingBar!: Phaser.GameObjects.Graphics;
@@ -20,9 +20,9 @@ export class PreloadScene extends Phaser.Scene {
         this.progressBar.clear();
         this.progressBar.fillStyle(0xe6f4ff, 1);
         this.progressBar.fillRect(
-          Setting.WIDTH / 4,
-          Setting.HEIGHT / 2 - 16,
-          (Setting.WIDTH / 2) * value,
+          SETTING.WIDTH / 4,
+          SETTING.HEIGHT / 2 - 16,
+          (SETTING.WIDTH / 2) * value,
           16,
         );
       },
@@ -39,37 +39,37 @@ export class PreloadScene extends Phaser.Scene {
     );
 
     this.load.atlas(
-      'pengsoo_run',
+      TEXTURE.PENGSOO_RUN,
       'character/pengsoo_run.png',
       'character/pengsoo_run.json',
     );
 
     this.load.atlas(
-      'pengsoo_jump',
+      TEXTURE.PENGSOO_JUMP,
       'character/pengsoo_jump.png',
       'character/pengsoo_jump.json',
     );
 
-    this.load.image('bg', 'background/bg.png');
-    this.load.image('sky', 'background/sky.png');
-    this.load.image('clouds1', 'background/clouds.png');
-    this.load.image('clouds2', 'background/clouds2.png');
+    this.load.image(TEXTURE.BG, 'background/bg.png');
+    this.load.image(TEXTURE.SKY, 'background/sky.png');
+    this.load.image(TEXTURE.CLOUDS_1, 'background/clouds.png');
+    this.load.image(TEXTURE.CLOUDS_2, 'background/clouds2.png');
 
-    this.load.bitmapFont('font', 'font/font.png', 'font/font.fnt');
+    this.load.bitmapFont(TEXTURE.FONT, 'font/font.png', 'font/font.fnt');
 
-    this.load.image('hole01', 'obstacle/hole01.png');
-    this.load.image('hole02', 'obstacle/hole02.png');
-    this.load.image('hole03', 'obstacle/hole03.png');
-    this.load.image('polar_bear', 'obstacle/polar_bear.png');
+    this.load.image(TEXTURE.HOLE_1, 'obstacle/hole01.png');
+    this.load.image(TEXTURE.HOLE_2, 'obstacle/hole02.png');
+    this.load.image(TEXTURE.HOLE_3, 'obstacle/hole03.png');
+    this.load.image(TEXTURE.POLAR_BEAR, 'obstacle/polar_bear.png');
   }
 
   create() {
     this.anims.create({
-      key: 'pengsoo-run',
-      frames: this.anims.generateFrameNames('pengsoo_run', {
+      key: ANIMAITON.PENGSOO_RUNNING,
+      frames: this.anims.generateFrameNames(TEXTURE.PENGSOO_RUN, {
         start: 1,
         end: 4,
-        prefix: 'pengsoo_run',
+        prefix: TEXTURE.PENGSOO_RUN,
         zeroPad: 2,
         suffix: '.png',
       }),
@@ -78,11 +78,11 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: 'pengsoo-jump',
-      frames: this.anims.generateFrameNames('pengsoo_jump', {
+      key: ANIMAITON.PENGSOO_JUMPING,
+      frames: this.anims.generateFrameNames(TEXTURE.PENGSOO_JUMP, {
         start: 1,
         end: 6,
-        prefix: 'pengsoo_jump',
+        prefix: TEXTURE.PENGSOO_JUMP,
         zeroPad: 2,
         suffix: '.png',
       }),
@@ -92,16 +92,16 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   update(): void {
-    this.scene.start('game');
+    this.scene.start('main');
   }
 
   private createLoadingbar(): void {
     this.loadingBar = this.add.graphics();
     this.loadingBar.fillStyle(0x18649a, 1);
     this.loadingBar.fillRect(
-      Setting.WIDTH / 4 - 2,
-      Setting.HEIGHT / 2 - 18,
-      Setting.WIDTH / 2 + 4,
+      SETTING.WIDTH / 4 - 2,
+      SETTING.HEIGHT / 2 - 18,
+      SETTING.WIDTH / 2 + 4,
       20,
     );
     this.progressBar = this.add.graphics();
