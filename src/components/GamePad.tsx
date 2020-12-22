@@ -46,6 +46,7 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.color.lightpink};
   background-image: ${({ theme }) => theme.gradient.sub};
   animation: none;
+  user-select: none;
 `;
 
 const Info = styled.div`
