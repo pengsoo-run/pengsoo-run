@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import { SETTING, TEXTURE } from '~/constants/GameSetting';
+import { EVENT } from '~/constants/Event';
 import { serviceInstance } from '~/store/middleware';
 
 import { Background } from '../gameObjects/Background';
@@ -112,17 +113,6 @@ export class MainScene extends Phaser.Scene {
   public update(time: number, delta: number): void {
     this.background.update();
 
-    // const body = this.pengsoo.body as Phaser.Physics.Arcade.Body;
-
-    // if (body.embedded) body.touching.none = false;
-
-    // const touching = !body.touching.none;
-    // const wasTouching = !body.wasTouching.none;
-
-    // if (touching && !wasTouching) {
-    //   this.pengsoo.gotHurt();
-    // }
-
     this.physics.overlap(this.pengsoo, this.obstacles, () => {
       this.pengsoo.gotHurt();
     });
@@ -132,7 +122,7 @@ export class MainScene extends Phaser.Scene {
         delay: 600,
         callback: () => {
           this.scene.pause();
-          serviceInstance.socket.emit('gameOver');
+          serviceInstance.socket.emit(EVENT.GAMEOVER);
         },
         callbackScope: this,
       });

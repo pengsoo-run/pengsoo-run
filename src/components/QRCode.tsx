@@ -6,13 +6,12 @@ interface QRCodeProps {
 }
 
 function QRCode({ url }: QRCodeProps) {
-  console.log('✅ QRCode URL', url);
   return (
     <QR
       value={url}
       size={300}
       bgColor={'transparent'}
-      fgColor='#FFFFFF'
+      fgColor='#ffffff'
       imageSettings={{
         src: 'lobby/peng-hi.png',
         width: 80,

@@ -11,15 +11,13 @@ interface ModeSelectionProps {
 }
 
 function ModeSelection({ handleClick }: ModeSelectionProps) {
-  const gameModeList = [GameMode.P1, GameMode.P2, GameMode.P3];
-
   return (
     <>
       <h1>Select Mode</h1>
       <ModeList>
-        {gameModeList.map(gameMode => (
+        {[GameMode.P1, GameMode.P2, GameMode.P3].map(gameMode => (
           <PopButton key={gameMode} text={gameMode} onClick={handleClick}>
-            <RoleList mode={gameMode} seletion />
+            <RoleList mode={gameMode} selection />
           </PopButton>
         ))}
       </ModeList>
