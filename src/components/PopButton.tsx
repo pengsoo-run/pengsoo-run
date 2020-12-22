@@ -68,12 +68,12 @@ const StyledButton = styled.button<{ size: string }>`
 
   &:disabled {
     background-color: ${({ theme }) => theme.color.main};
-    color: white;
+    color: ${({ theme }) => theme.color.sub};
     opacity: 0.8;
     transform: none;
 
     &:hover {
-      color: white;
+      color: ${({ theme }) => theme.color.sub};
       box-shadow: none;
       cursor: wait;
     }

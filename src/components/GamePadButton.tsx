@@ -132,20 +132,20 @@ const StyledButton = styled.button`
   }
 
   &.jump {
-    background: #df4242;
-    color: #fff;
-    border: 3px solid #a01b1b;
-    box-shadow: 0px 12px 0px #a01b1b;
-    text-shadow: 1px 1px 1px #a01b1b;
+    background: ${({ theme }) => theme.color.red};
+    color: ${({ theme }) => theme.color.sub};
+    border: 3px solid ${({ theme }) => theme.color.darkred};
+    box-shadow: 0px 12px 0px ${({ theme }) => theme.color.darkred};
+    text-shadow: 1px 1px 1px ${({ theme }) => theme.color.darkred};
   }
 
   &.left,
   &.right {
-    background: #f57936;
-    color: #fff;
-    border: 3px solid #bc4809;
-    box-shadow: 0px 12px 0px #bc4809;
-    text-shadow: 1px 1px 1px #bc4809;
+    background: ${({ theme }) => theme.color.orange};
+    color: ${({ theme }) => theme.color.sub};
+    border: 3px solid ${({ theme }) => theme.color.darkorange};
+    box-shadow: 0px 12px 0px ${({ theme }) => theme.color.darkorange};
+    text-shadow: 1px 1px 1px ${({ theme }) => theme.color.darkorange};
   }
 `;
 

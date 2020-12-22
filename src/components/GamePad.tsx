@@ -43,15 +43,15 @@ const Wrapper = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #da7e7a;
-  background-image: linear-gradient(240deg, #c5736f 0%, #9085b4 100%);
+  background-color: ${({ theme }) => theme.color.lightpink};
+  background-image: ${({ theme }) => theme.gradient.sub};
   animation: none;
 `;
 
 const Info = styled.div`
   position: absolute;
   width: 100vw;
-  color: white;
+  color: ${({ theme }) => theme.color.sub};
   text-align: right;
   font-size: 3vw;
   padding: 5px 10px;
