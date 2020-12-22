@@ -58,8 +58,6 @@ export class MainScene extends Phaser.Scene {
         this.lifeText.setText(`LIFE ${this.registry.values.life}`);
       }
     });
-
-    this.physics.add.overlap(this.pengsoo, this.obstacles);
   }
 
   private addObstacle(): void {
@@ -114,16 +112,20 @@ export class MainScene extends Phaser.Scene {
   public update(time: number, delta: number): void {
     this.background.update();
 
-    const body = this.pengsoo.body as Phaser.Physics.Arcade.Body;
+    // const body = this.pengsoo.body as Phaser.Physics.Arcade.Body;
 
-    if (body.embedded) body.touching.none = false;
+    // if (body.embedded) body.touching.none = false;
 
-    const touching = !body.touching.none;
-    const wasTouching = !body.wasTouching.none;
+    // const touching = !body.touching.none;
+    // const wasTouching = !body.wasTouching.none;
 
-    if (touching && !wasTouching) {
+    // if (touching && !wasTouching) {
+    //   this.pengsoo.gotHurt();
+    // }
+
+    this.physics.overlap(this.pengsoo, this.obstacles, () => {
       this.pengsoo.gotHurt();
-    }
+    });
 
     if (this.registry.values.life === 0) {
       this.time.addEvent({

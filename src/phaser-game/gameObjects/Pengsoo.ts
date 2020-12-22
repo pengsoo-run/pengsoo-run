@@ -117,14 +117,14 @@ export class Pengsoo extends Phaser.GameObjects.Container {
   }
 
   public gotHurt() {
-    if (this.currentState !== PengsooState.JUMPING) {
-      this.scene.cameras.main.shake(600, 0.03, true);
-      this.hurtTimer = 30;
-      this.currentState = PengsooState.HURT;
-      this.emit('collision');
+    if (this.currentState !== PengsooState.RUNNING) return;
 
-      this.text.setY(-50);
-      this.text.setVisible(true);
-    }
+    this.scene.cameras.main.shake(600, 0.03, true);
+    this.hurtTimer = 30;
+    this.currentState = PengsooState.HURT;
+    this.emit('collision');
+
+    this.text.setY(-50);
+    this.text.setVisible(true);
   }
 }
