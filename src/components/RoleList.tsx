@@ -1,4 +1,3 @@
-import { GridFactory } from 'matter';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -10,28 +9,28 @@ interface RoleListProps {
   mode: GameMode;
   size: number;
   playerList: Player[];
-  seletion: boolean;
+  selection: boolean;
 }
 
-function RoleList({ mode, size, playerList, seletion }: RoleListProps) {
+function RoleList({ mode, size, playerList, selection }: RoleListProps) {
   const [connectedPlayer, setConnectedPlayer] = useState<PlayerRole[]>([]);
 
   useEffect(() => {
-    const filterd: PlayerRole[] = [];
+    const filtered: PlayerRole[] = [];
 
     for (const player of playerList) {
       if (!player.id || !player.role) continue;
 
       if (player.role === PlayerRole.ALL) {
-        filterd.push(PlayerRole.L, PlayerRole.R, PlayerRole.J);
+        filtered.push(PlayerRole.L, PlayerRole.R, PlayerRole.J);
       } else if (player.role == PlayerRole.LR) {
-        filterd.push(PlayerRole.L, PlayerRole.R);
+        filtered.push(PlayerRole.L, PlayerRole.R);
       } else {
-        filterd.push(player.role);
+        filtered.push(player.role);
       }
     }
 
-    setConnectedPlayer(filterd);
+    setConnectedPlayer(filtered);
   }, [playerList]);
 
   const playerRoleList =
@@ -46,7 +45,7 @@ function RoleList({ mode, size, playerList, seletion }: RoleListProps) {
           key={role}
           role={role}
           size={size}
-          isConnected={seletion || connectedPlayer.includes(role)}>
+          isConnected={selection || connectedPlayer.includes(role)}>
           {role}
         </Role>
       ))}
@@ -112,7 +111,7 @@ const Role = styled.div<{
 RoleList.defaultProps = {
   size: 50,
   playerList: [],
-  seletion: false,
+  selection: false,
 };
 
 export default RoleList;

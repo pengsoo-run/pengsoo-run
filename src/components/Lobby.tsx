@@ -30,7 +30,7 @@ function Lobby() {
     dispatch(createGame(selectedMode));
   };
 
-  const initGmae = () => dispatch(startGame(game.id));
+  const initGame = () => dispatch(startGame(game.id));
 
   return (
     <Layout>
@@ -40,7 +40,7 @@ function Lobby() {
           gameId={game.id}
           mode={game.mode}
           playerList={game.playerList}
-          initGmae={initGmae}
+          initGame={initGame}
         />
       ) : (
         <ModeSelection handleClick={selectMode} />

@@ -13,10 +13,10 @@ interface WaitingPlayerProps {
   gameId: string;
   playerList: Player[];
   mode: GameMode;
-  initGmae: () => void;
+  initGame: () => void;
 }
 
-function WaitingPlayer({ gameId, playerList, mode, initGmae }: WaitingPlayerProps) {
+function WaitingPlayer({ gameId, playerList, mode, initGame }: WaitingPlayerProps) {
   const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
@@ -31,9 +31,9 @@ function WaitingPlayer({ gameId, playerList, mode, initGmae }: WaitingPlayerProp
         <div className='players'>
           <RoleList size={110} mode={mode} playerList={playerList} />
           {isReady ? (
-            <PopButton text='🐧GAME START🐧' onClick={initGmae} />
+            <PopButton text='🐧GAME START🐧' onClick={initGame} />
           ) : (
-            <PopButton text='Waiting...' size='1.8rem' waiting />
+            <PopButton text='WAITING...' size='1.8rem' waiting />
           )}
         </div>
       </Wrapper>
