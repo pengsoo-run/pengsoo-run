@@ -1,60 +1,44 @@
 # 🐧 Pengsoo Run
 
 <p>
-  <img src="README.assets/pengsoo-run.gif" alt="pengsoo-run" width="45%" />
-  <img src="README.assets/play.jpg" width="50%" />
+  <img src="README.assets/pengsoo-run.gif" alt="pengsoo-run" width="40%" />
+  <img src="README.assets/play.jpg" width="45%" />
 </p>
 
 **펭수런**은 Canvas 위에서 펭수와 함께 쉬지않고 달리는 웹 게임입니다.
 
 게임화면과 게임패드를 각각 **다른 디바이스를 사용하여 플레이**하도록 하여 추억의 팩 게임을 연상시킬 수 있게끔 구현하였습니다. 최대 3인까지 멀티플레잉이 가능하지만 각 플레이어마다 펭수를 컨트롤 하는 역할만 다르게 부여되므로 모든 플레이어는 한마음이 되어야 합니다.
 
-> 🔗 Deploy Site :  [https://pengsoo-run.live/](https://pengsoo-run.live/)
+> 🔗 배포 사이트 :  [https://pengsoo-run.live/](https://pengsoo-run.live/)
 
-> 🔗 Play Video :  [https://youtu.be/qQbZtCGF5fU](https://youtu.be/qQbZtCGF5fU)
+> 🔗 전체 플레이 영상 :  [https://youtu.be/qQbZtCGF5fU](https://youtu.be/qQbZtCGF5fU)
 
 <br>
 
-## 🚀 바로가기
+## 🚀 Shortcut
 
-- 💡 [기획 동기](#-%EA%B8%B0%ED%9A%8D%EB%8F%99%EA%B8%B0)
-- 🛠 [기술 스택](#-%EA%B8%B0%EC%88%A0%EC%8A%A4%ED%83%9D)
-- 📆 [프로젝트 기간](#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EA%B8%B0%EA%B0%84)
-- 📌 [주요 기능](#-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
+- 💡 [Inspiration](#-Inspiration)
+- 📆 [Schedule](#-Schedule)
+- 🛠 [Tech Stack](#-Tech-Stack)
+- 💾 [Usage](#-Usage)
+- 📡 [Deploy](#-Deploy)
+- ✨ [Features](#-Features)
 - 🎯 [WHY (About Tech Stack)](#-why-about-tech-stack)
-- 🌊 [위기상황](#-%EC%9C%84%EA%B8%B0%EC%83%81%ED%99%A9)
+- 🌊 [Challenge](#-Challenge)
 
 <br>
 
-## 💡 기획동기
+## 💡 Inspiration
 
-많은 사람들이 한번쯤은 해보았던 추억의 팩게임, **남극탐험**을 Canvas를 활용하여 만들어 보고싶었습니다.  
-하지만 단순히 PC의 키보드나 마우스를 이용해서 플레이한다면 예전 그 팩게임의 향수를 느낄 수 없다고 생각했습니다. 그래서 플레이 화면은 PC 브라우저에 띄우더라도, 게임패드를 모바일에 구현해서 **원격으로 펭수를 조종**할 수 있다면 어떨까 생각하게 되었습니다.  
+많은 사람들이 한번쯤은 해보았던 추억의 팩게임, **남극탐험**을 Canvas를 활용하여 만들어 보고싶었습니다.
+
+하지만 단순히 PC의 키보드나 마우스를 이용해서 플레이한다면 예전 그 팩게임의 향수를 느낄 수 없다고 생각했습니다.  
+그래서 플레이 화면은 PC 브라우저에 띄우더라도, 게임패드를 모바일에 구현해서 **원격으로 펭수를 조종**할 수 있다면 어떨까 생각하게 되었습니다.  
 또한 마치 2인3각처럼 여럿이서 한 캐릭터를 움직이도록 하여 멀티플레잉적인 요소도 추가해보고자 하였습니다.
 
 <br>
 
-## 🛠 기술스택
-
-**프론트엔드**
-
-- TypeScript
-- React
-- Redux (Redux-toolkit)
-- Phaser
-- Socket.io Client
-- Styled-components
-
-**백엔드**
-
-- TypeScript
-- NestJS
-- Redis
-- Socket.io
-
-<br>
-
-## 📆 프로젝트기간
+## 📆 Schedule
 
 - **기획 :** 2020/11/30 ~ 2020/12/06 **(1주간)**
     - **1주차** 아이디어 및 기술스택 검토
@@ -65,13 +49,74 @@
 
 <br>
 
-## 📌 주요 기능
+## 🛠 Tech Stack
+
+- **Frontend**
+
+  - TypeScript
+  - React
+  - Redux (Redux-toolkit)
+  - Phaser
+  - Socket.io Client
+  - Styled-components
+
+- **Backend**
+
+  - TypeScript
+  - NestJS
+  - Redis
+  - Socket.io
+
+<br>
+
+## 💾 Usage
+
+- **Installation**
+
+  - Local 환경에서 실행하기 위한 사전 준비가 필요합니다.
+     - [Redis](https://redis.io/)
+
+
+  - 각 Repository를 Clone한 후, 루트 디렉토리의 `.env.sample` 파일의 형식에 맞추어 환경 변수를 입력하세요.
+
+- **Frontend**
+```
+git clone https://github.com/pengsoo-run/pengsoo-run.git
+npm install
+npm run start
+```
+
+- **Backend**
+```
+git clone https://github.com/pengsoo-run/pengsoo-run-server.git
+npm install
+npm run start:dev
+```
+
+<br>
+
+## 📡 Deploy
+
+- **Frontend**
+
+  - Netlify : 애플리케이션 배포
+
+- **Backend**
+
+  - AWS Elastic Beanstalk : 애플리케이션 배포
+  - Amazon ACM (AWS Certificate Manager) : SSL 발급 및 관리
+  - Elastic Load Balancing : HTTPS 리스너 생성
+  - AWS Code Pipeline : 배포 자동화
+
+<br>
+
+## ✨ Features
 
 |||
 |:---:|:---:|
-|![feature1](/README.assets/feature1.png)<br>플레이어 수에 맞게 게임 모드를 선택할 수 있습니다.<br><br>|![feature1](/README.assets/feature2.png)<br>모바일에서 QR코드를 이용해 게임패드 페이지로 접속 할 수 있습니다.<br>유저 연결 성공 시 활성화 된 역할에 불이 들어옵니다.|
-|![feature1](/README.assets/feature3.png)<br>모든 플레이어가 접속한 경우 `GAME START` 버튼이 활성화 됩니다.<br><br>|![feature1](/README.assets/feature4.png "iOS")<br>모바일 상에서는 플레이어의 역할에 맞게 버튼이 보여집니다.<br>실시간으로 현재 게임 진행상황을 알 수 있습니다.|
-|![feature1](/README.assets/feature5.png)<br>모바일에서 버튼을 눌러 펭수를 조종할 수 있습니다.<br>물웅덩이나 북극곰과 충돌 시, 라이프가 소진됩니다.<br>일정 스코어에 도달 시, 게임속도가 빨라집니다.|![feature1](/README.assets/feature6.png)<br>펭수의 라이프가 모두 소진되면 게임오버 됩니다.|
+|![feature1](/README.assets/feature1.png)  플레이어 수에 맞게 게임 모드를 선택할 수 있습니다.<br><br>|![feature1](/README.assets/feature2.png)  모바일에서 QR코드를 이용해 게임패드 페이지로 접속 할 수 있습니다.<br>유저 연결 성공 시 활성화 된 역할에 불이 들어옵니다.|
+|![feature1](/README.assets/feature3.png)  모든 플레이어가 접속한 경우 `GAME START` 버튼이 활성화 됩니다.<br><br>|![feature1](/README.assets/feature4.png "iOS")  모바일 상에서는 플레이어의 역할에 맞게 버튼이 보여집니다.<br>실시간으로 현재 게임 진행상황을 알 수 있습니다.|
+|![feature1](/README.assets/feature5.png)  모바일에서 버튼을 눌러 펭수를 조종할 수 있습니다.<br>물웅덩이나 북극곰과 충돌 시, 라이프가 소진됩니다.<br>일정 스코어에 도달 시, 게임속도가 빨라집니다.|![feature1](/README.assets/feature6.png)  펭수의 라이프가 모두 소진되면 게임오버 됩니다.|
 
 
 <br>
@@ -105,7 +150,7 @@ NodeJS를 사용하게 되면 아무래도 자유도가 높기 때문에 여러 
 
 <br>
 
-## 🌊 위기상황
+## 🌊 Challenge
 
 **리덕스 커스텀 미들웨어 만들기**
 
