@@ -36,7 +36,7 @@ export default class SocketService {
   }
 
   public interceptAction(action: AnyAction): boolean {
-    const [prefix, name] = this.useActionType(action.type);
+    const [prefix, name] = action.type.split('/');
 
     if (prefix === 'event') {
       this.socket.emit(name, action.payload);
@@ -54,11 +54,6 @@ export default class SocketService {
     this.socket.on(ev, (payload: any) => {
       this.dispatch(action(payload));
     });
-  }
-
-  private useActionType(type: string): string[] {
-    const splited = type.split('/');
-    return [splited[0], splited[1]];
   }
 
   private removeGameListener(): void {

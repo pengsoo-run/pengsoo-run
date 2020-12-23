@@ -16,7 +16,7 @@ export class MainScene extends Phaser.Scene {
   private lifeText!: Phaser.GameObjects.BitmapText;
   private obstacleTimer!: Phaser.Time.TimerEvent;
   private currentLevel: number = 1;
-  private brackTime: number = 1;
+  private breakTime: number = 1;
 
   constructor() {
     super('main');
@@ -62,8 +62,8 @@ export class MainScene extends Phaser.Scene {
   }
 
   private addObstacle(): void {
-    if (this.brackTime > 0) {
-      this.brackTime -= 1;
+    if (this.breakTime > 0) {
+      this.breakTime -= 1;
       return;
     }
 
@@ -74,7 +74,7 @@ export class MainScene extends Phaser.Scene {
     ) {
       this.currentLevel += 1;
       this.obstacleTimer.destroy();
-      this.brackTime = 3;
+      this.breakTime = 3;
       this.obstacleTimer = this.time.addEvent(this.setObstacleConfig(this.currentLevel));
       this.registry.values.score += 1;
       return;
