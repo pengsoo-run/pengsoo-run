@@ -1,13 +1,19 @@
 # 🐧 Pengsoo Run
 
-<p>
-  <img src="README.assets/pengsoo-run.gif" alt="pengsoo-run" width="40%" />
-  <img src="README.assets/play.jpg" width="45%" />
-</p>
+<img src="README.assets/preview.png" alt="pengsoo-run" width="75%" />
 
 **펭수런**은 Canvas 위에서 펭수와 함께 쉬지않고 달리는 웹 게임입니다.
 
 게임화면과 게임패드를 각각 **다른 디바이스를 사용하여 플레이**하도록 하여 추억의 팩 게임을 연상시킬 수 있게끔 구현하였습니다. 최대 3인까지 멀티플레잉이 가능하지만 각 플레이어마다 펭수를 컨트롤 하는 역할만 다르게 부여되므로 모든 플레이어는 한마음이 되어야 합니다.
+
+<br>
+
+###  🎮 Let's play Pengsoo Run!
+
+<p>
+  <img src="README.assets/pengsoo-run.gif" alt="pengsoo-run" width="40%" />
+  <img src="README.assets/play.jpg" width="45%" />
+</p>
 
 > 🔗 배포 사이트 :  [https://pengsoo-run.live/](https://pengsoo-run.live/)
 
