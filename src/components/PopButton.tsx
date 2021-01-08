@@ -49,9 +49,9 @@ const StyledButton = styled.button<{ size: string }>`
   outline: none;
   user-select: none;
 
-  color: ${({ theme }) => theme.color.darkblue};
   font-family: inherit;
   font-size: ${({ size }) => size};
+  color: ${({ theme }) => theme.color.darkblue};
 
   transition: all 0.2s;
 

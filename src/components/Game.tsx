@@ -16,13 +16,16 @@ function Game() {
 
   useEffect(() => {
     const phaserGame = new Phaser.Game(config);
+
     return () => {
       phaserGame.destroy(true);
     };
   }, []);
 
   useEffect(() => {
-    if (game.progress === GameProgress.WAITING) return history.push('/');
+    if (game.progress === GameProgress.WAITING) {
+      return history.push('/');
+    }
   }, [game]);
 
   return (

@@ -25,8 +25,7 @@ function Lobby() {
     }
   }, [game]);
 
-  const selectMode = (selected: string) => {
-    const selectedMode = selected;
+  const selectMode = (selectedMode: string) => {
     dispatch(createGame(selectedMode));
   };
 
@@ -54,11 +53,6 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-
-  h1 {
-    font-size: 3rem;
-    margin: 10px 0;
-  }
 `;
 
 export default Lobby;

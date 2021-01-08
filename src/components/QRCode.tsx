@@ -19,7 +19,7 @@ function QRCode({ url }: QRCodeProps) {
         excavate: true,
       }}
       level='Q'
-      style={{ margin: '10px 10px 20px 10px' }}
+      style={{ margin: '10px' }}
     />
   );
 }
