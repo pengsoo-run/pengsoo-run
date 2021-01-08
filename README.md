@@ -65,6 +65,8 @@
   - Phaser
   - Socket.io Client
   - Styled-components
+  - Jest
+  - React-testing-library
 
 - **Backend**
 
