@@ -6,7 +6,7 @@ import { getRoleList, getRoleListByMode } from '~/util/gameUI';
 
 import { flexCenter } from './styles/mixin';
 
-interface RoleListProps {
+export interface RoleListProps {
   mode: GameMode;
   size: number;
   playerList: Player[];

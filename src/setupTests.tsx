@@ -25,6 +25,7 @@ const createMockComponent = (componentName: string) => {
 
 createMockComponent('Lobby');
 createMockComponent('Game');
+createMockComponent('QRCode');
 
 Object.defineProperty(HTMLMediaElement.prototype, 'muted', { set: () => {} });
 

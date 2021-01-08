@@ -10,7 +10,7 @@ import QRCode from './QRCode';
 import RoleList from './RoleList';
 import PopButton from './PopButton';
 
-interface WaitingPlayerProps {
+export interface WaitingPlayerProps {
   gameId: string;
   playerList: Player[];
   mode: GameMode;
