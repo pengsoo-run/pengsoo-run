@@ -13,9 +13,9 @@
     "strictNullChecks": true,
     "jsx": "react",
     "noEmit": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["src/*"]
     }
   },
   "include": ["./src/**/*"],
