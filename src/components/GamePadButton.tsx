@@ -1,57 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { PlayerRole } from '~/types/game.type';
 import { buttonDown, buttonUp } from '~/store/playerSlice';
+import { getRoleList } from '~/util/gameUI';
+
+import { orangeSet, redSet } from './styles/mixin';
 
 interface GamePadButtonProps {
   role: PlayerRole;
 }
 
-type pressEvent =
-  | React.MouseEvent<HTMLButtonElement>
-  | React.TouchEvent<HTMLButtonElement>;
-
 function GamePadButton({ role }: GamePadButtonProps) {
   const dispatch = useDispatch();
-  const [roleList, setRoleList] = useState<PlayerRole[]>([]);
 
-  useEffect(() => {
-    const roleList: PlayerRole[] = [];
-
-    switch (role) {
-      case PlayerRole.ALL:
-        roleList.push(PlayerRole.L, PlayerRole.R, PlayerRole.J);
-        break;
-      case PlayerRole.LR:
-        roleList.push(PlayerRole.L, PlayerRole.R);
-        break;
-      default:
-        roleList.push(role);
-        break;
-    }
-
-    setRoleList(roleList);
-  }, [role]);
-
-  const onPressDown = (ev: pressEvent): void => {
+  const onPressDown = (ev: React.TouchEvent<HTMLButtonElement>): void => {
     dispatch(buttonDown(ev.currentTarget.textContent));
   };
 
-  const onPressUp = (ev: pressEvent): void => {
+  const onPressUp = (ev: React.TouchEvent<HTMLButtonElement>): void => {
     dispatch(buttonUp(ev.currentTarget.textContent));
   };
 
   return (
     <Layout className={role}>
-      {roleList.map(role => (
+      {getRoleList(role).map(role => (
         <StyledButton
           key={role}
           className={role}
-          onMouseDown={onPressDown}
           onTouchStart={onPressDown}
-          onMouseUp={onPressUp}
           onTouchEnd={onPressUp}>
           {role}
         </StyledButton>
@@ -114,38 +92,29 @@ const Layout = styled.div`
 `;
 
 const StyledButton = styled.button`
+  all: unset;
   position: absolute;
   bottom: 15vh;
-  outline: none;
-  border: none;
   border-radius: 50%;
   font-family: inherit;
-  text-decoration: none;
+  text-align: center;
   user-select: none;
-  transform: translateY(0px);
+  transform: translateY(0);
   transition: All 0.06s ease-in-out;
 
   &:active {
     transform: translateY(10px);
-    box-shadow: none !important;
+    box-shadow: none;
     transition: All 0.06s ease-in-out;
   }
 
   &.jump {
-    background: ${({ theme }) => theme.color.red};
-    color: ${({ theme }) => theme.color.sub};
-    border: 3px solid ${({ theme }) => theme.color.darkred};
-    box-shadow: 0px 12px 0px ${({ theme }) => theme.color.darkred};
-    text-shadow: 1px 1px 1px ${({ theme }) => theme.color.darkred};
+    ${redSet}
   }
 
   &.left,
   &.right {
-    background: ${({ theme }) => theme.color.orange};
-    color: ${({ theme }) => theme.color.sub};
-    border: 3px solid ${({ theme }) => theme.color.darkorange};
-    box-shadow: 0px 12px 0px ${({ theme }) => theme.color.darkorange};
-    text-shadow: 1px 1px 1px ${({ theme }) => theme.color.darkorange};
+    ${orangeSet}
   }
 `;
 

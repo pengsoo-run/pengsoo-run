@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { GameMode, Player } from '~/types/game.type';
+import { getGamePadUrl } from '~/util/gameUI';
 
 import { flexCenter } from './styles/mixin';
 
@@ -27,7 +28,7 @@ function WaitingPlayer({ gameId, playerList, mode, initGame }: WaitingPlayerProp
     <>
       <Title>Waiting for Player</Title>
       <Wrapper>
-        <QRCode url={`https://${window.location.host}/gamepad/${gameId}`} />
+        <QRCode url={getGamePadUrl(gameId)} />
         <div className='players'>
           <RoleList size={110} mode={mode} playerList={playerList} />
           {isReady
